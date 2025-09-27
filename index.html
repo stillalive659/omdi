@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olimpiade Madrasah Tingkat Provinsi</title>
+    <title>OMDI TSAN COFA &</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="src/icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app"></div>
     <script type="module" src="app.js"></script>
+    <script>
+  window.addEventListener('scroll', function () {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 40) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+</script>
+
 </body>
 </html>
