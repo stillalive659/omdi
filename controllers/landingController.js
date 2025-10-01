@@ -9,8 +9,9 @@ async function loadPartial(url) {
 async function initLandingPage() {
   const app = document.getElementById('app');
   const navbar = await loadPartial('views/navbar.html');
-  const content = await loadPartial('views/content.html');
-  app.innerHTML = navbar + content;
+  const home = await loadPartial('views/home.html');
+  const sejarah = await loadPartial('views/sejarah.html');
+  app.innerHTML = navbar + home + sejarah;
 }
 
 export default initLandingPage;
