@@ -1,3 +1,37 @@
+.categories {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categories {
+  padding: 70px 24px;
+  max-width: 800px;
+  text-align: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sejarah {
+  width: 100%;
+  max-width: 900px;
+  align-self: center;
+  display: block;
+  margin-top: 80px;
+}
+.sejarah {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -7,6 +41,10 @@ body {
   background-repeat: repeat-y;         /* Ulang secara vertikal */
   background-size: 100% auto;          /* Lebar penuh, tinggi otomatis */
   background-position: top left;
+  display : flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
 }
 
 .landing-container {
@@ -138,25 +176,6 @@ body {
   }
 }
 
-.padi {
-  position: absolute;
-  bottom: 0;
-  left: -100px;
-
-  animation: putarPadi 0.5s ease-in-out;
-  transform: rotate(10deg);
-  left: -40px;
-  bottom: -20px;
-}
-
-.maskot {
-  position: absolute;
-  bottom: -100px;
-  right: 0;
-  height: 800px;
-  opacity: 0.85;
-  z-index: -1;
-}
 
 
 
@@ -164,7 +183,6 @@ body {
 .sejarah {
   padding: 70px 24px;
   max-width: 800px;
-  margin: 0 auto;
   text-align: center;
   background: rgba(77, 77, 77, 0.2); /* transparan supaya blur terlihat */
   border-radius: 15px;
@@ -196,7 +214,70 @@ body {
   transition: all 0.1s ease;
 }
 
+.categories div h1{
+  font-family: "Changa One", sans-serif;
+  color: black;
+}
 
+
+.mtk,.ipa, .ips {
+  width: 200px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.mtk .logo {
+  top: -30px;
+  border: 2px solid black;
+  background-color: red;
+  border-radius: 100%;
+  width: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  img {
+    width: 50px;
+    height: auto;
+  }
+}
+.ipa .logo {
+  top: -30px;
+  border: 2px solid black;
+  background-color: blue;
+  border-radius: 100%;
+  width: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  img {
+    width: 50px;
+    height: auto;
+  }
+}
+.ips .logo {
+  top: -30px;
+  border: 2px solid black;
+  background-color: green;
+  border-radius: 100%;
+  width: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  img {
+    width: 50px;
+    height: auto;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .navbar-menu {
