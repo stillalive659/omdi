@@ -12,7 +12,7 @@ async function initLandingPage() {
   const home = await loadPartial('views/home.html');
   const sejarah = await loadPartial('views/sejarah.html');
   const categories = await loadPartial('views/categories.html');
-  app.innerHTML = navbar + home + sejarah + categories;
+  app.innerHTML = "<div class='landing-page'>" + navbar + home + sejarah + categories + "</div>";
 }
 
 export default initLandingPage;
