@@ -1,4 +1,4 @@
-.categories {
+.mapel {
   display: flex;
   align-items: center;
   width: 100%;
@@ -8,7 +8,7 @@
   justify-content: space-between;
 }
 
-.categories {
+.mapel {
   padding: 70px 24px;
   max-width: 800px;
   text-align: center;
@@ -299,5 +299,166 @@ body {
 
   .sejarah p {
     font-size: 1rem;
+  }
+}
+
+/* ====== Categories component styles (namespaced) ====== */
+.categories {
+  width: 100%;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.categories__title {
+  font-size: 1.5rem;
+  margin: 0 0 24px 0;
+  text-align: center;
+  color: #0f1724;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  position: relative;
+  display: inline-block;
+  padding: 12px 20px;
+  background: #ffffff; /* white pill */
+  border-radius: 999px; /* pill */
+  border: 1px solid rgba(15,23,36,0.06);
+  box-shadow: 0 8px 18px rgba(15,23,36,0.08);
+}
+
+/* remove decorative underline when using pill background */
+.categories__title::after {
+  display: none;
+}
+
+.categories__title {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.categories__title:hover,
+.categories__title:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(21,101,192,0.18);
+}
+
+@media screen and (max-width: 560px) {
+  .categories__title {
+    font-size: 1.125rem;
+    padding: 10px 16px;
+  }
+}
+
+.categories__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Grid placement: keep logical DOM order but place IPA above PAI in the middle column on wide screens */
+@media screen and (min-width: 901px) {
+  .categories__grid { grid-auto-flow: dense; }
+  .categories__card.ipa { grid-column: 2 / 3; grid-row: 1; }
+  .categories__card.pai { grid-column: 2 / 3; grid-row: 2; }
+}
+
+.categories__grid { align-items: stretch; }
+
+.categories__card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertical centering */
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(10,20,30,0.16);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  cursor: default;
+  aspect-ratio: 1 / 1; /* make square */
+  height: auto; /* allow aspect-ratio to control height */
+}
+
+.categories__card:focus,
+.categories__card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 68px rgba(10,20,30,0.22);
+  outline: none;
+}
+
+
+.categories__logo img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  margin: 0; /* remove extra bottom gap */
+  align-self: center;
+}
+
+/* Make logos stand out: white circular background with colored ring per category */
+.categories__logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 22px 48px rgba(10,20,30,0.18);
+  margin-bottom: 12px;
+  line-height: 0; /* remove inline svg baseline gap */
+}
+
+.categories__card.mtk .categories__logo {
+  box-shadow: 0 28px 64px rgba(244,67,54,0.20);
+  border: 4px solid rgba(244,67,54,0.26);
+}
+
+.categories__card.ipa .categories__logo {
+  box-shadow: 0 28px 64px rgba(33,150,243,0.20);
+  border: 4px solid rgba(33,150,243,0.26);
+}
+
+.categories__card.ips .categories__logo {
+  box-shadow: 0 28px 64px rgba(76,175,80,0.20);
+  border: 4px solid rgba(76,175,80,0.26);
+}
+
+.categories__card.pai .categories__logo {
+  box-shadow: 0 28px 64px rgba(123,31,162,0.20);
+  border: 4px solid rgba(123,31,162,0.26);
+}
+
+.categories__name {
+  margin: 0 0 8px 0;
+  font-size: 1.125rem;
+  color: #222;
+}
+
+.categories__desc {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+@media screen and (max-width: 900px) {
+  .categories__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .categories__grid {
+    grid-template-columns: 1fr;
+  }
+  .categories {
+    padding: 16px;
+    margin: 32px auto;
   }
 }
