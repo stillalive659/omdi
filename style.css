@@ -50,18 +50,19 @@ body {
 
 .landing-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh; /* allow content to grow on small screens */
 }
 
 .home {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh; /* prefer min-height to avoid overflow on mobile */
   background: url('src/bg.png') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 40px 0; /* give vertical breathing room on small screens */
 }
 
 .p1 {
@@ -112,6 +113,53 @@ body {
 
 .cta-btn:hover {
   background: linear-gradient(90deg, #42a5f5 0%, #1565c0 100%);
+}
+
+/* Mobile / small-screen specific hero adjustments */
+@media screen and (max-width: 560px) {
+  /* Navbar: reduce horizontal padding and height */
+  .navbar {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  /* Make hero flexible and not full-bleed */
+  .p1 {
+    width: min(92%, 420px);
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .p1 h1 {
+    font-size: 2.9rem; /* scale down hero heading */
+    line-height: 1.05;
+  }
+
+  .p1 h2 {
+    font-size: 1.1rem;
+  }
+
+  .p1 p {
+    font-size: 0.875rem;
+    width: 80%;
+    color: #e6eefc;
+  }
+
+  .cta-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  /* Ensure the landing container doesn't force vertical overflow on small devices */
+  .landing-container, .home {
+    min-height: 100vh;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
 }
 
 /* Navbar Styles */
@@ -307,7 +355,7 @@ body {
   width: 100%;
   max-width: 1100px;
   margin: 60px auto;
-  padding: 24px;
+  padding: 32px 48px; /* desktop: larger side padding */
   box-sizing: border-box;
   text-align: center;
 }
@@ -347,24 +395,22 @@ body {
   .categories__title {
     font-size: 1.125rem;
     padding: 10px 16px;
+    width: 80%;
   }
 }
 
 .categories__grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* prevent columns from stretching edge-to-edge: ensure a comfortable min width */
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
   gap: 20px;
   padding: 0;
   margin: 0;
+  justify-items: center; /* center items inside their grid cells */
+  justify-content: center; /* center the whole grid when columns are narrower */
 }
 
-/* Grid placement: keep logical DOM order but place IPA above PAI in the middle column on wide screens */
-@media screen and (min-width: 901px) {
-  .categories__grid { grid-auto-flow: dense; }
-  .categories__card.ipa { grid-column: 2 / 3; grid-row: 1; }
-  .categories__card.pai { grid-column: 2 / 3; grid-row: 2; }
-}
 
 .categories__grid { align-items: stretch; }
 
@@ -373,6 +419,7 @@ body {
   border-radius: 12px;
   padding: 20px;
   display: flex;
+  /* width/height controlled by grid and aspect-ratio; avoid fixed pixel size */
   flex-direction: column;
   align-items: center;
   justify-content: center; /* vertical centering */
@@ -382,6 +429,7 @@ body {
   cursor: default;
   aspect-ratio: 1 / 1; /* make square */
   height: auto; /* allow aspect-ratio to control height */
+  max-width: 420px; /* prevent cards from becoming too wide on large screens */
 }
 
 .categories__card:focus,
@@ -450,15 +498,23 @@ body {
 @media screen and (max-width: 900px) {
   .categories__grid {
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    justify-content: center;
   }
+  .categories__card { width: min(360px, 92%); }
 }
 
 @media screen and (max-width: 560px) {
   .categories__grid {
     grid-template-columns: 1fr;
+    justify-items: center; /* ensure single-column item is centered */
   }
   .categories {
-    padding: 16px;
+    padding: 16px 24px; /* mobile: smaller side padding */
     margin: 32px auto;
+  }
+  /* constrain card width on small screens so it doesn't span full width and stays centered */
+  .categories__card {
+    width: min(360px, 92%);
   }
 }
