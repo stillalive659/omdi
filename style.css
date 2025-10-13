@@ -31,7 +31,7 @@
 }
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Changa One", sans-serif;
   background: #f3f6fa;
   overflow-x: hidden;
   background-image: url('src/bg2.png');
@@ -358,86 +358,6 @@ body {
   }
 }
 
-/* ====== Categories component styles (namespaced) ====== */
-.categories {
-  width: 100%;
-  max-width: 1100px;
-  margin: 60px auto;
-  padding: 64px 48px; /* increased breathing room from viewport edges */
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.categories__title {
-  font-size: 1.5rem;
-  margin: 0 0 24px 0;
-  text-align: center;
-  color: #0f1724;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  position: relative;
-  display: inline-block;
-  padding: 12px 20px;
-  background: #ffffff; /* white pill */
-  border-radius: 999px; /* pill */
-  border: 1px solid rgba(15,23,36,0.06);
-  box-shadow: 0 8px 18px rgba(15,23,36,0.08);
-}
-
-/* remove decorative underline when using pill background */
-.categories__title::after {
-  display: none;
-}
-
-.categories__title {
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.categories__title:hover,
-.categories__title:focus {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(21,101,192,0.18);
-}
-
-@media screen and (max-width: 560px) {
-  .categories__title {
-    font-size: 1.125rem;
-    padding: 10px 16px;
-    width: 80%;
-  }
-}
-
-.categories__grid {
-  list-style: none;
-  display: grid;
-  /* Let the grid fit as many equal columns as possible while keeping a comfortable min width */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px; /* larger gap on desktop */
-  padding: 0 32px; /* inner padding so cards don't touch viewport */
-  margin: 0;
-  justify-items: center; /* center items inside their grid cells */
-  justify-content: center; /* center the whole grid when columns are narrower */
-  align-items: center;
-}
-
-  .categories__card {
-  background: rgba(255,255,255,0.96);
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  /* width/height controlled by grid and aspect-ratio; use full column width so all cards are same size */
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* vertical centering */
-  text-align: center;
-  box-shadow: 0 16px 40px rgba(10,20,30,0.16);
-  transition: transform 200ms ease, box-shadow 200ms ease;
-  cursor: default;
-  aspect-ratio: 1 / 1; /* make square */
-  height: auto; /* allow aspect-ratio to control height */
-  max-width: 260px; /* cap card width so they don't become huge */
-}
 
 .categories__card:focus,
 .categories__card:hover {
@@ -470,22 +390,22 @@ body {
   line-height: 0; /* remove inline svg baseline gap */
 }
 
-.categories__card.mtk .categories__logo {
-  box-shadow: 0 28px 64px rgba(244,67,54,0.20);
+ .mtk .categories__logo {
+  box-shadow: 0 28px 64px rgba(14, 89, 13, 0.2);
   border: 4px solid rgba(244,67,54,0.26);
 }
 
-.categories__card.ipa .categories__logo {
+.ipa .categories__logo {
   box-shadow: 0 28px 64px rgba(33,150,243,0.20);
   border: 4px solid rgba(33,150,243,0.26);
 }
 
-.categories__card.ips .categories__logo {
+.ips .categories__logo {
   box-shadow: 0 28px 64px rgba(76,175,80,0.20);
   border: 4px solid rgba(76,175,80,0.26);
 }
 
-.categories__card.pai .categories__logo {
+.pai .categories__logo {
   box-shadow: 0 28px 64px rgba(123,31,162,0.20);
   border: 4px solid rgba(123,31,162,0.26);
 }
@@ -501,6 +421,77 @@ body {
   color: #555;
   font-size: 0.95rem;
 }
+
+.c1 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.c2 {
+  margin-top: 100px;
+  width: 80%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.c3 {
+  width: 100%;
+  height: 500px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  padding-bottom: 40px;
+
+}
+.c4 {
+  width: 100%;
+  height: 500px;
+  background: rgba(77, 77, 77, 0.2); /* transparan supaya blur terlihat */
+  backdrop-filter: blur(10px); /* efek blur */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 4 kolom */
+      grid-template-rows: repeat(2, 1fr);    /* 4 baris */
+      gap: 10px;
+      padding-right: 40px;
+      padding-bottom: 40px;
+      
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+        
+
+}
+
+  .mtk, .ipa, .ips, .pai {
+  background: rgba(255,255,255,0.96);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+  /* width/height controlled by grid and aspect-ratio; use full column width so all cards are same size */
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertical centering */
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(10,20,30,0.16);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  cursor: default;
+  height: auto; /* allow aspect-ratio to control height */
+  max-width: 260px; /* cap card width so they don't become huge */
+}
+
+
+
+
+
+
+
 
 @media screen and (max-width: 900px) {
   .categories__grid {
