@@ -23,45 +23,55 @@
   display: block;
   margin-top: 80px;
 }
+
 .sejarah {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
+
 body {
   margin: 0;
   font-family: "Changa One", sans-serif;
   background: #f3f6fa;
   overflow-x: hidden;
-  background-image: url('src/bg2.png');
-  background-repeat: repeat-y;         /* Ulang secara vertikal */
-  background-size: 100% auto;          /* Lebar penuh, tinggi otomatis */
+  background-image: url('src/b.png');
+  background-repeat: repeat-y;
+  /* Ulang secara vertikal */
+  background-size: 100% auto;
+  /* Lebar penuh, tinggi otomatis */
   background-position: top left;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* let content take full width */
-  justify-content: flex-start; /* stack content from top down */
+  align-items: stretch;
+  /* let content take full width */
+  justify-content: flex-start;
+  /* stack content from top down */
   box-sizing: border-box;
 }
 
 .landing-container {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* allow content to grow on small screens */
+  min-height: 100vh;
+  /* allow content to grow on small screens */
   box-sizing: border-box;
-  padding-top: 64px; /* reserve space for fixed navbar so content isn't overlapped */
+  padding-top: 64px;
+  /* reserve space for fixed navbar so content isn't overlapped */
 }
 
 .home {
   width: 100%;
-  min-height: 100vh; /* prefer min-height to avoid overflow on mobile */
-  background: url('src/bg.png') no-repeat center center/cover;
+  min-height: 100vh;
+  /* prefer min-height to avoid overflow on mobile */
+  background: url('src/c.png') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 40px 0; /* give vertical breathing room on small screens */
+  padding: 40px 0;
+  /* give vertical breathing room on small screens */
   box-sizing: border-box;
 }
 
@@ -71,6 +81,7 @@ body {
   width: 600px;
   padding: 40px;
 }
+
 .p1 h1 {
   font-family: "Changa One", sans-serif;
   font-size: 5rem;
@@ -87,6 +98,7 @@ body {
 }
 
 .p1 p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
   color: #b9b9b9;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -99,6 +111,7 @@ body {
 }
 
 .cta-btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: inline-block;
   padding: 12px 32px;
   background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
@@ -175,16 +188,16 @@ body {
   .countdown {
     gap: 8px;
   }
-  
+
   .countdown-box {
     min-width: 60px;
     padding: 10px 5px;
   }
-  
+
   .countdown-box span {
     font-size: 1.5rem;
   }
-  
+
   .countdown-box p {
     font-size: 0.75rem;
   }
@@ -192,6 +205,7 @@ body {
 
 /* Mobile / small-screen specific hero adjustments */
 @media screen and (max-width: 560px) {
+
   /* Navbar: reduce horizontal padding and height */
   .navbar {
     padding: 0 16px;
@@ -210,7 +224,8 @@ body {
   }
 
   .p1 h1 {
-    font-size: 2.9rem; /* scale down hero heading */
+    font-size: 2.9rem;
+    /* scale down hero heading */
     line-height: 1.05;
   }
 
@@ -230,7 +245,8 @@ body {
   }
 
   /* Ensure the landing container doesn't force vertical overflow on small devices */
-  .landing-container, .home {
+  .landing-container,
+  .home {
     min-height: 100vh;
     padding-top: 20px;
     padding-bottom: 40px;
@@ -250,7 +266,7 @@ body {
   z-index: 10;
   padding: 0 48px;
   box-sizing: border-box;
-    transition: all 0.1s ease;
+  transition: all 0.1s ease;
 
 }
 
@@ -308,23 +324,26 @@ body {
   padding: 70px 24px;
   max-width: 800px;
   text-align: center;
-  background: rgba(77, 77, 77, 0.2); /* transparan supaya blur terlihat */
+  background: rgba(77, 77, 77, 0.2);
+  /* transparan supaya blur terlihat */
   border-radius: 15px;
-  backdrop-filter: blur(10px); /* efek blur */
-  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  backdrop-filter: blur(10px);
+  /* efek blur */
+  -webkit-backdrop-filter: blur(10px);
+  /* untuk Safari */
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .space {
   height: 100px;
-  
+
 }
 
 .sejarah h2 {
   color: white;
   font-size: 2.5rem;
   margin-bottom: 0.5em;
-} 
+}
 
 .sejarah p {
   color: white;
@@ -338,7 +357,7 @@ body {
   transition: all 0.1s ease;
 }
 
-.categories div h1{
+.categories div h1 {
   font-family: "Changa One", sans-serif;
   color: black;
   position: relative;
@@ -346,7 +365,9 @@ body {
 }
 
 
-.mtk,.ipa, .ips {
+.mtk,
+.ipa,
+.ips {
   width: 250px;
   height: 200px;
   background-color: white;
@@ -370,6 +391,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 60px;
+
   img {
     width: 50px;
     height: auto;
@@ -377,15 +399,18 @@ body {
 }
 
 .mtk .logo {
-  background-color: #f44336; /* Merah */
+  background-color: #f44336;
+  /* Merah */
 }
 
 .ipa .logo {
-  background-color: #2196f3; /* Biru */
+  background-color: #2196f3;
+  /* Biru */
 }
 
 .ips .logo {
-  background-color: #4caf50; /* Hijau */
+  background-color: #4caf50;
+  /* Hijau */
 }
 
 .landing_page {
@@ -411,16 +436,20 @@ body {
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-    padding: 0 20px; /* reduced padding on mobile */
+    padding: 0 20px;
+    /* reduced padding on mobile */
     box-sizing: border-box;
     transition: all 0.1s ease;
   }
+
   .navbar-menu {
-    display: none; /* hide menu on mobile */
+    display: none;
+    /* hide menu on mobile */
   }
 
   .navbar-logo {
-    justify-content: flex-start; /* move logo to the left */
+    justify-content: flex-start;
+    /* move logo to the left */
     padding-left: 6px;
   }
 
@@ -437,7 +466,7 @@ body {
 .categories__card:focus,
 .categories__card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 26px 68px rgba(10,20,30,0.22);
+  box-shadow: 0 26px 68px rgba(10, 20, 30, 0.22);
   outline: none;
 }
 
@@ -447,7 +476,8 @@ body {
   height: 64px;
   object-fit: contain;
   display: block;
-  margin: 0; /* remove extra bottom gap */
+  margin: 0;
+  /* remove extra bottom gap */
   align-self: center;
 }
 
@@ -460,29 +490,42 @@ body {
   align-items: center;
   justify-content: center;
   background: #fff;
-  box-shadow: 0 22px 48px rgba(10,20,30,0.18);
+  box-shadow: 0 22px 48px rgba(10, 20, 30, 0.18);
   margin-bottom: 12px;
-  line-height: 0; /* remove inline svg baseline gap */
+  line-height: 0;
+  /* remove inline svg baseline gap */
 }
 
- .mtk .categories__logo {
+.mtk .categories__logo {
   box-shadow: 0 28px 64px rgba(14, 89, 13, 0.2);
-  border: 4px solid rgba(244,67,54,0.26);
+  border: 4px solid rgba(244, 67, 54, 0.26);
 }
 
 .ipa .categories__logo {
-  box-shadow: 0 28px 64px rgba(33,150,243,0.20);
-  border: 4px solid rgba(33,150,243,0.26);
+  box-shadow: 0 28px 64px rgba(33, 150, 243, 0.20);
+  border: 4px solid rgba(33, 150, 243, 0.26);
 }
 
 .ips .categories__logo {
-  box-shadow: 0 28px 64px rgba(76,175,80,0.20);
-  border: 4px solid rgba(76,175,80,0.26);
+  box-shadow: 0 28px 64px rgba(76, 175, 80, 0.20);
+  border: 4px solid rgba(76, 175, 80, 0.26);
 }
 
 .pai .categories__logo {
-  box-shadow: 0 28px 64px rgba(123,31,162,0.20);
-  border: 4px solid rgba(123,31,162,0.26);
+  box-shadow: 0 28px 64px rgba(123, 31, 162, 0.20);
+  border: 4px solid rgba(123, 31, 162, 0.26);
+}
+.pai .categories__logo {
+  box-shadow: 0 28px 64px rgba(123, 31, 162, 0.20);
+  border: 4px solid rgba(123, 31, 162, 0.26);
+}
+.tahfiz .categories__logo {
+  box-shadow: 0 28px 64px rgba(34, 255, 0, 0.2);
+  border: 4px solid rgba(31, 162, 33, 0.26);
+}
+.solo-song .categories__logo {
+  box-shadow: 0 28px 64px rgba(123, 31, 162, 0.20);
+  border: 4px solid rgba(123, 31, 162, 0.26);
 }
 
 .categories__name {
@@ -499,18 +542,23 @@ body {
 
 .c1 {
   width: 100%;
-  height: 100vh;
+  height: auto; /* allow section to size to its content instead of forcing full viewport height */
   display: flex;
   justify-content: center;
+  margin: 20px 0;
+  padding: 24px 0; /* small vertical padding to keep breathing room between sections */
+  box-sizing: border-box;
 }
+
 .c2 {
-  margin-top: 100px;
+  margin-top: 0; /* remove the extra 100px top margin that created large gaps */
   width: 80%;
   height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .c3 {
   width: 100%;
   height: 500px;
@@ -518,32 +566,68 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-  padding-bottom: 40px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
 }
+
 .c4 {
-  width: 100%;
+  width: 80%;
   height: 500px;
-  background: rgba(77, 77, 77, 0.2); /* transparan supaya blur terlihat */
-  backdrop-filter: blur(10px); /* efek blur */
-  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  background: rgba(77, 77, 77, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 4 kolom */
-      grid-template-rows: repeat(2, 1fr);    /* 4 baris */
-      gap: 10px;
-      padding-right: 40px;
-      padding-bottom: 40px;
-      
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-        
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+
+}
+.c5 {
+  width: 80%;
+  height: 500px;
+  background: rgba(77, 77, 77, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 10px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 
 }
 
-  .mtk, .ipa, .ips, .pai {
-  background: rgba(255,255,255,0.96);
+.c3 h1 {
+  font-family: "Changa One", sans-serif;
+  font-size: 4rem;
+  color: black;
+}
+
+.c3 img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  /* Membuat bentuk lingkaran */
+  border: 5px solid #555;
+  /* Warna dan ketebalan bingkai */
+  object-fit: cover;
+  /* Agar gambar tetap proporsional dalam lingkaran */
+}
+
+.mtk,
+.ipa,
+.ips,
+.pai,
+.tahfiz,
+.solo-song {
+  background: rgba(255, 255, 255, 0.96);
   border-radius: 12px;
   padding: 10px;
   margin: 20px;
@@ -552,19 +636,44 @@ body {
   width: 80%;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* vertical centering */
+  justify-content: center;
+  /* vertical centering */
   text-align: center;
-  box-shadow: 0 16px 40px rgba(10,20,30,0.16);
+  box-shadow: 0 16px 40px rgba(10, 20, 30, 0.16);
   transition: transform 200ms ease, box-shadow 200ms ease;
   cursor: default;
-  height: auto; /* allow aspect-ratio to control height */
-  max-width: 260px; /* cap card width so they don't become huge */
+  height: auto;
+  /* allow aspect-ratio to control height */
+  max-width: 260px;
+  /* cap card width so they don't become huge */
+}
+
+.solo-song,.tahfiz {
+  
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+  /* width/height controlled by grid and aspect-ratio; use full column width so all cards are same size */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* vertical centering */
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(10, 20, 30, 0.16);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  cursor: default;
+  height: auto;
+  /* allow aspect-ratio to control height */
+  max-width: 600px;
+  /* cap card width so they don't become huge */
 }
 
 
-
-
-
+.space {
+  height: 100px;
+}
 
 
 
@@ -574,7 +683,10 @@ body {
     justify-items: center;
     justify-content: center;
   }
-  .categories__card { width: min(360px, 92%); }
+
+  .categories__card {
+    width: min(360px, 92%);
+  }
 }
 
 /* Desktop: force a single non-wrapping row for categories while preserving card sizes */
@@ -584,37 +696,45 @@ body {
     flex-direction: row;
     gap: 40px;
     align-items: stretch;
-    justify-content: center; /* center the single-row layout */
-    padding: 0 32px; /* keep inner padding */
+    justify-content: center;
+    /* center the single-row layout */
+    padding: 0 32px;
+    /* keep inner padding */
   }
 
-  .categories__grid > * {
-    flex: 0 0 auto; /* preserve card width */
+  .categories__grid>* {
+    flex: 0 0 auto;
+    /* preserve card width */
   }
 
   /* do not override card width here — keep their natural / capped size */
 }
 
 @media screen and (max-width: 560px) {
+
   /* Mobile: show all categories in a 2-column grid (no horizontal scroll) */
   .categories__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px; /* slightly larger gap for breathing room */
-    padding: 0 20px; /* inner padding so cards don't touch edges */
+    gap: 24px;
+    /* slightly larger gap for breathing room */
+    padding: 0 20px;
+    /* inner padding so cards don't touch edges */
     justify-items: center;
     grid-auto-rows: 1fr;
   }
 
   .categories {
-    padding: 36px 28px; /* mobile: comfortable side padding */
+    padding: 36px 28px;
+    /* mobile: comfortable side padding */
     margin: 24px auto;
   }
 
   /* make each card equal-sized and fit the column while keeping a cap */
   .categories__card {
     width: 100%;
-    max-width: 120px;/* reduce max so two columns comfortably fit with padding */
+    max-width: 120px;
+    /* reduce max so two columns comfortably fit with padding */
     aspect-ratio: 1 / 1;
   }
 }
