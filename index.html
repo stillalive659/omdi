@@ -1,157 +1,844 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMDI TSAN COFA 7</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="src/icon.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMDI TSAN COFA 7 - Olimpiade Madrasah Digital Indonesia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple-primary: #8B5CF6;
+      --purple-dark: #6366F1;
+      --purple-light: #A855F7;
+      --bg-primary: #FAFAFA;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 250, 250, 0.8);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+
+
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      background: var(--purple-primary);
+      color: white;
+      padding: 0.7rem 1.8rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 140px 2rem 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--purple-primary);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-primary);
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--purple-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Countdown */
+    .countdown-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem 80px;
+    }
+
+    .countdown-card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .countdown-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .countdown-item {
+      text-align: center;
+    }
+
+    .countdown-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--purple-primary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Section */
+    section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--purple-primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      background: #f5f5f5;
+      border-radius: 14px;
+      margin-bottom: 1.5rem;
+      object-fit: cover;
+      border: 2px dashed #e0e0e0;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Feature Section */
+    .feature-section {
+      background: white;
+      border-radius: 32px;
+      padding: 5rem 3rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .feature-text h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-text p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .feature-img {
+      width: 100%;
+      height: 400px;
+      background: #f5f5f5;
+      border-radius: 20px;
+      border: 2px dashed #e0e0e0;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      height: 300px;
+      background: #f5f5f5;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px dashed #e0e0e0;
+      transition: all 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-primary);
+      color: white;
+      padding: 4rem 2rem 2rem;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+    }
+
+    .footer-section h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .edit-note {
+      background: #FFF3CD;
+      color: #856404;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+      text-align: center;
+      border: 1px solid #FFEAA7;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 73px;
+        left: -100%;
+        width: 100%;
+        background: rgba(250, 250, 250, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transition: left 0.3s;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-content {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .countdown-value {
+        font-size: 2.5rem;
+      }
+
+      .feature-section {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <a href="https://mtsnpadangpanjang.sch.id/" class="navbar-logo">
-            <img src="src/icon.png" alt="Logo" style="height:36px;width:36px;vertical-align:middle;" />
-        </a>
-        <ul class="navbar-menu">
-            <li><a href="#home">Beranda</a></li>
-            <li><a href="#sejarah">Sejarah</a></li>
-            <li><a href="#cabang">Cabang</a></li>
-            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfd-qID2Pyw1kkNbf4gJUYrbrH5C1dCvWZQtNjo9kXmjJ4WwA/formResponse">Pendaftaran</a></li>
-        </ul>
+  <header>
+    <nav>
+      <a href="#" class="logo">
+        <img src="src/icon.png" alt="OMDI Logo"
+          style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
+        <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#tentang">Tentang</a></li>
+         <li><a href="#Juknis">Juknis</a></li>
+        <li><a href="#bidang-lomba">Bidang Lomba</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+        <li><a href="#" class="btn-primary">Daftar Sekarang</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <!-- Home Section -->
-    <div class="home" id="home">
-        <div class="p1">
-            <h1>Olimpiade Madrasah Tingkat Provinsi</h1>
-            <h2>06 Desember2025</h2>
-            <p>Ikuti Olimpiade Madrasah tingkat provinsi! Ajang kompetisi bergengsi untuk siswa madrasah dengan berbagai
-                cabang
-                lomba dan hadiah menarik.</p>
-            <p class="location">Lokasi: Provinsi Anda</p>
-            <!-- Countdown Timer -->
-            <div class="countdown-container">
-                <h3>Pendaftaran Ditutup Dalam:</h3>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-box">
-                        <span id="days">00</span>
-                        <p>Hari</p>
-                    </div>
-                    <div class="countdown-box">
-                        <span id="hours">00</span>
-                        <p>Jam</p>
-                    </div>
-                    <div class="countdown-box">
-                        <span id="minutes">00</span>
-                        <p>Menit</p>
-                    </div>
-                    <div class="countdown-box">
-                        <span id="seconds">00</span>
-                        <p>Detik</p>
-                    </div>
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfd-qID2Pyw1kkNbf4gJUYrbrH5C1dCvWZQtNjo9kXmjJ4WwA/formResponse" class="cta-btn">Daftar Sekarang</a>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        🏆 OMDI 2025
+      </div>
+      <h1>Olimpiade Madrasah<br>Digital Indonesia</h1>
+      <p>Tempat Lahirnya Generasi Bertaqwa, Kompetitif, dan Inovatif dari MTs Negeri Padang Panjang</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary" style="padding: 1rem 2.5rem;">Daftar Sekarang</a>
+        <a href="#bidang-lomba" class="btn-secondary">Lihat Bidang Lomba</a>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <div class="countdown-wrapper">
+      <div class="countdown-card">
+        <div class="countdown-title">⏰ Hitung Mundur Menuju OMDI 2025</div>
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-value" id="days">00</span>
+            <span class="countdown-label">Hari</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="hours">00</span>
+            <span class="countdown-label">Jam</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="minutes">00</span>
+            <span class="countdown-label">Menit</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-value" id="seconds">00</span>
+            <span class="countdown-label">Detik</span>
+          </div>
         </div>
+        <!-- <div class="edit-note" style="margin-top: 2rem;">🕐 Edit tanggal target di JavaScript</div> -->
+      </div>
     </div>
 
-    <script>
-        // Set the target date for December 6, 2025
-        const targetDate = new Date('December 6, 2025 00:00:00').getTime();
+    <!-- About Section -->
+    <section id="tentang">
+      <div class="section-header">
+        <div class="section-badge">Tentang OMDI</div>
+        <h2 class="section-title">Kompetisi Bergengsi Tingkat Nasional</h2>
+        <p class="section-description">OMDI adalah ajang kompetisi yang mempertemukan siswa-siswi SD/SDIT terbaik di
+          Indonesia</p>
+      </div>
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const timeRemaining = targetDate - now;
-
-            // Calculate days, hours, minutes, seconds
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-            // Display the countdown
-            document.getElementById('days').innerText = days.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
-
-            // If the countdown is over
-            if (timeRemaining < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById('countdown').innerHTML = '<div class="expired">Waktu Pendaftaran Telah Berakhir!</div>';
-            }
-        }
-
-        // Update countdown every second
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initialize immediately
-    </script>
-
-    <!-- Sejarah Section -->
-    <div class="sejarah" id="sejarah">
-        <h2>Sejarah OMDI</h2>
-        <p>Olimpiade Madrasah (OMDI) adalah ajang kompetisi tahunan yang diselenggarakan untuk siswa madrasah di seluruh
-          Indonesia. Tujuan utama OMDI adalah untuk mendorong semangat belajar, kreativitas, dan inovasi di kalangan siswa
-          madrasah melalui berbagai cabang lomba seperti Matematika, IPA, IPS dan PAI.</p>
-        <p>OMDI pertama kali diadakan pada tahun 2010 dan sejak itu telah menjadi salah satu acara pendidikan terbesar di
-          Indonesia. Setiap tahun, ribuan siswa dari berbagai madrasah berpartisipasi dalam kompetisi ini, yang tidak hanya
-          menguji kemampuan akademis mereka tetapi juga keterampilan sosial dan kepemimpinan.</p>
-        <p>Selain sebagai ajang kompetisi, OMDI juga bertujuan untuk mempererat hubungan antar madrasah dan mempromosikan
-          nilai-nilai keislaman serta budaya Indonesia. Melalui OMDI, diharapkan siswa madrasah dapat mengembangkan potensi
-          mereka secara maksimal dan menjadi generasi penerus bangsa yang berkualitas.</p>
-    </div>
-
-    <!-- Categories Section -->
-    <div class="c1" id="cabang">
-        <div class="c2">
-            <div class="c3"></div>
-            <div class="c4">
-                <div class="mtk">
-                    <div class="categories__logo" aria-hidden="true">
-                        <img src="src/categories/mtk.svg" alt="" />
-                    </div>
-                    <h3 class="categories__name">Matematika</h3>
-                    <p class="categories__desc">Soal berpola logika dan hitungan — individu dan tim.</p>
-                </div>
-                <div class="ipa">
-                    <div class="categories__logo" aria-hidden="true">
-                        <img src="src/categories/ipa.svg" alt="" />
-                    </div>
-                    <h3 class="categories__name">IPA</h3>
-                    <p class="categories__desc">Eksperimen dan teori ilmu pengetahuan alam.</p>
-                </div>
-                <div class="ips">
-                    <div class="categories__logo" aria-hidden="true">
-                        <img src="src/categories/ips.svg" alt="" />
-                    </div>
-                    <h3 class="categories__name">IPS</h3>
-                    <p class="categories__desc">Pengetahuan sosial dan studi kasus kontemporer.</p>
-                </div>
-                <div class="pai">
-                    <div class="categories__logo" aria-hidden="true">
-                        <img src="src/categories/pai.svg" alt="" />
-                    </div>
-                    <h3 class="categories__name">PAI</h3>
-                    <p class="categories__desc">Pembelajaran agama Islam dan nilai-nilai keagamaan.</p>
-                </div>
-            </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <h3>Prestasi Gemilang</h3>
+          <p>Wadah bagi siswa untuk mengembangkan potensi dan meraih prestasi di berbagai bidang akademik dan
+            non-akademik</p>
         </div>
-    </div>
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3>Inovasi & Kreativitas</h3>
+          <p>Mendorong siswa untuk berpikir kritis, kreatif, dan inovatif dalam menyelesaikan tantangan</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h3>Kolaborasi Tim</h3>
+          <p>Membangun kerja sama tim yang solid dan kompak untuk meraih hasil terbaik bersama-sama</p>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        // Wait for the page content to be loaded before adding scroll event listener
-        window.addEventListener('scroll', function () {
-            const navbar = document.getElementById('navbar');
-            if (navbar && window.scrollY > 40) {
-                navbar.classList.add('scrolled');
-            } else if (navbar) {
-                navbar.classList.remove('scrolled');
-            }
+    <!-- Bidang Lomba Section -->
+    <section id="bidang-lomba">
+      <div class="section-header">
+        <div class="section-badge">Bidang Lomba</div>
+        <h2 class="section-title">6 Bidang yang Dilombakan</h2>
+        <p class="section-description">Pilih bidang yang sesuai dengan minat dan bakatmu</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <img src="" alt="Matematika" class="card-img">
+          <div class="edit-note">📸 Foto Matematika</div>
+          <h3>🔢 Matematika</h3>
+          <p>Kompetisi matematika untuk mengasah kemampuan logika, problem solving, dan analytical thinking siswa</p>
+        </div>
+        <div class="card">
+          <img src="" alt="IPA" class="card-img">
+          <div class="edit-note">📸 Foto IPA</div>
+          <h3>🔬 IPA</h3>
+          <p>Lomba IPA yang menguji pengetahuan tentang biologi, fisika, dan kimia serta aplikasinya</p>
+        </div>
+        <div class="card">
+          <img src="" alt="IPS" class="card-img">
+          <div class="edit-note">📸 Foto IPS</div>
+          <h3>🌍 IPS</h3>
+          <p>Kompetisi IPS untuk menguji pemahaman tentang sejarah, geografi, ekonomi, dan sosiologi</p>
+        </div>
+        <div class="card">
+          <img src="" alt="Tahfiz" class="card-img">
+          <div class="edit-note">📸 Foto Tahfiz</div>
+          <h3>📖 Tahfiz Al-Qur'an</h3>
+          <p>Lomba menghafal Al-Qur'an dengan tajwid yang benar dan pemahaman makna ayat suci</p>
+        </div>
+        <div class="card">
+          <img src="" alt="Seni" class="card-img">
+          <div class="edit-note">📸 Foto Seni</div>
+          <h3>🎨 Seni & Budaya</h3>
+          <p>Kompetisi kreativitas dalam bidang seni musik, tari, teater bernuansa Islami</p>
+        </div>
+        <div class="card">
+          <img src="" alt="Digital" class="card-img">
+          <div class="edit-note">📸 Foto Digital</div>
+          <h3>💻 Literasi Digital</h3>
+          <p>Lomba teknologi informasi seperti coding, desain grafis, dan video editing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Sections
+    <section>
+      <div class="feature-section">
+        <div class="feature-content">
+          <div class="feature-text">
+            <h2>Persiapan Matang untuk Sukses</h2>
+            <p>Program pembinaan intensif dengan mentor berpengalaman untuk mempersiapkan siswa menghadapi kompetisi
+              tingkat nasional dengan percaya diri dan kemampuan terbaik.</p>
+            <a href="#" class="btn-primary">Pelajari Lebih Lanjut</a>
+          </div>
+          <div class="feature-img"></div>
+        </div>
+        <div class="edit-note">📸 Ganti dengan foto persiapan/pembinaan</div>
+      </div>
+
+      <div class="feature-section">
+        <div class="feature-content" style="direction: rtl;">
+          <div class="feature-text" style="direction: ltr;">
+            <h2>Fasilitas & Pendampingan Terbaik</h2>
+            <p>Kami menyediakan fasilitas lengkap dan pendampingan berkelanjutan untuk memastikan setiap peserta
+              mendapatkan dukungan maksimal dalam perjalanan mereka meraih prestasi.</p>
+            <a href="#" class="btn-primary">Lihat Fasilitas</a>
+          </div>
+          <div class="feature-img"></div>
+        </div>
+        <div class="edit-note">📸 Ganti dengan foto fasilitas</div>
+      </div>
+    </section> -->
+
+    <!-- Gallery -->
+    <section id="galeri">
+      <div class="section-header">
+        <div class="section-badge">Galeri</div>
+        <h2 class="section-title">Dokumentasi Kegiatan</h2>
+        <p class="section-description">Momen-momen berharga dari perjalanan OMDI TSAN</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+      </div>
+      <div class="edit-note" style="margin-top: 1rem;">📸 Ganti dengan foto dokumentasi kegiatan</div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="kontak">
+    <div class="footer-content">
+      <div>
+        <div class="footer-logo">OMDI TSAN COFA 7</div>
+        <p class="footer-description">Olimpiade Madrasah Digital Indonesia - Tempat Lahirnya Generasi Bertaqwa,
+          Kompetitif, dan Inovatif dari MTs Negeri Padang Panjang.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Menu</h4>
+        <ul class="footer-links">
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#Juknis">Juknis</a></li>
+          <li><a href="#bidang-lomba">Bidang Lomba</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#">Pendaftaran</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Kontak</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:info@mtsnpadangpanjang.sch.id">Email</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Lokasi</h4>
+        <ul class="footer-links">
+          <li style="color: rgba(255,255,255,0.7)">Jl. Gurun Panjang</li>
+          <li style="color: rgba(255,255,255,0.7)">Padang Panjang</li>
+          <li style="color: rgba(255,255,255,0.7)">Sumatera Barat</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 OMDI TSAN COFA 7. All rights reserved. <a href="https://ilwa.my.id">Design By : Ilwa & zrnf</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Countdown Timer
+    const targetDate = new Date('2025-12-06T00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
         });
-    </script>
-</body>
-</html>
+      });
+    });
+  </script>
