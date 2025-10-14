@@ -1,65 +1,11 @@
-<div class="home">
+<div class="home" id="home">
     <div class="p1">
         <h1>OMDI TSAN COFA 7th</h1>
-        <h2>Desember 2025</h2>
+        <h2>Oktober 2025</h2>
         <p>Ikuti Olimpiade Madrasah tingkat provinsi! Ajang kompetisi bergengsi untuk siswa madrasah dengan berbagai
             cabang
             lomba dan hadiah menarik.</p>
         <p class="location">Lokasi: Provinsi Anda</p>
-        <!-- Countdown Timer -->
-        <div class="countdown-container">
-            <h3>Pendaftaran Ditutup Dalam:</h3>
-            <div class="countdown" id="countdown">
-                <div class="countdown-box">
-                    <span id="days">00</span>
-                    <p>Hari</p>
-                </div>
-                <div class="countdown-box">
-                    <span id="hours">00</span>
-                    <p>Jam</p>
-                </div>
-                <div class="countdown-box">
-                    <span id="minutes">00</span>
-                    <p>Menit</p>
-                </div>
-                <div class="countdown-box">
-                    <span id="seconds">00</span>
-                    <p>Detik</p>
-                </div>
-            </div>
-        </div>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfd-qID2Pyw1kkNbf4gJUYrbrH5C1dCvWZQtNjo9kXmjJ4WwA/formResponse" class="cta-btn">Daftar Sekarang</a>
     </div>
 </div>
-
-<script>
-// Set the target date for December 6, 2025
-const targetDate = new Date('December 6, 2025 00:00:00').getTime();
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const timeRemaining = targetDate - now;
-
-    // Calculate days, hours, minutes, seconds
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-    // Display the countdown
-    document.getElementById('days').innerText = days.toString().padStart(2, '0');
-    document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
-
-    // If the countdown is over
-    if (timeRemaining < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById('countdown').innerHTML = '<div class="expired">Waktu Pendaftaran Telah Berakhir!</div>';
-    }
-}
-
-// Update countdown every second
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); // Initialize immediately
-</script>
