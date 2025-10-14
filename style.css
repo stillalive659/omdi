@@ -115,6 +115,81 @@ body {
   background: linear-gradient(90deg, #42a5f5 0%, #1565c0 100%);
 }
 
+/* Countdown Styles */
+.countdown-container {
+  margin: 20px 0 30px 0;
+}
+
+.countdown-container h3 {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.countdown-box {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 15px 5px;
+  min-width: 80px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.countdown-box span {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.countdown-box p {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.countdown .expired {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Mobile responsiveness for countdown */
+@media screen and (max-width: 560px) {
+  .countdown {
+    gap: 8px;
+  }
+  
+  .countdown-box {
+    min-width: 60px;
+    padding: 10px 5px;
+  }
+  
+  .countdown-box span {
+    font-size: 1.5rem;
+  }
+  
+  .countdown-box p {
+    font-size: 0.75rem;
+  }
+}
+
 /* Mobile / small-screen specific hero adjustments */
 @media screen and (max-width: 560px) {
   /* Navbar: reduce horizontal padding and height */
