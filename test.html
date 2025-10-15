@@ -1,109 +1,108 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeri Foto Bergeser Terus</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Halaman dengan Preloader Cepat</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      background: #000;
+      margin: 0;
+      font-family: sans-serif;
+      background-image: url('https://picsum.photos/1600/900?random=1');
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+    }
+
+    #preloader {
+      position: fixed;
+      inset: 0;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      background: white;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
     }
-
-    /* area utama slider */
-    .slider {
-      position: relative;
-      width: 90%;
-      max-width: 1000px;
-      overflow: hidden;
-    }
-
-    /* track tempat semua foto berjalan */
-    .slide-track {
-      display: flex;
-      align-items: center;
-      gap: 20px; /* jarak antar foto */
-      width: max-content;
-      animation: scroll 30s linear infinite;
-    }
-
-    /* tiap foto */
-    .slide {
-      flex: 0 0 auto;
-    }
-
-    .slide img {
-      width: 500px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 12px; /* sudut membulat */
-      display: block;
-    }
-
-    /* gradasi kiri-kanan agar halus */
-    .slider::before,
-    .slider::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 100px;
-      height: 100%;
-      z-index: 2;
+    #preloader.hidden {
+      opacity: 0;
       pointer-events: none;
+      visibility: hidden;
     }
-
-    .slider::before {
-      left: 0;
-      background: linear-gradient(to right, #000 30%, transparent);
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #ddd;
+      border-top-color: #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .slider::after {
-      right: 0;
-      background: linear-gradient(to left, #000 30%, transparent);
-    }
-
-    /* animasi berjalan */
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+    #percent {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-
-  <div class="slider">
-    <div class="slide-track">
-      <!-- 6 gambar asli -->
-      <div class="slide"><img src="https://picsum.photos/id/1018/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1024/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1039/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1043/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1050/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1062/800/450" alt=""></div>
-
-      <!-- duplikasi agar loop-nya halus -->
-      <div class="slide"><img src="https://picsum.photos/id/1018/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1024/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1039/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1043/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1050/800/450" alt=""></div>
-      <div class="slide"><img src="https://picsum.photos/id/1062/800/450" alt=""></div>
+  <div id="preloader">
+    <div>
+      <div class="spinner"></div>
+      <div id="percent">0%</div>
     </div>
   </div>
 
+  <main style="padding:40px;color:white;text-shadow:0 1px 3px black">
+    <h1>Halaman Contoh</h1>
+    <p>Isi halaman muncul segera setelah semua gambar termuat.</p>
+    <img src="https://picsum.photos/800/400?random=2" alt="">
+  </main>
+
+  <script>
+    const preloader = document.getElementById('preloader');
+    const percentText = document.getElementById('percent');
+
+    function getBackgroundUrls() {
+      const urls = new Set();
+      const regex = /url\((['"])?(.+?)\1\)/g;
+      document.querySelectorAll('*').forEach(el => {
+        const bg = getComputedStyle(el).backgroundImage;
+        let m;
+        while ((m = regex.exec(bg)) !== null) {
+          urls.add(new URL(m[2], document.baseURI).href);
+        }
+      });
+      return [...urls];
+    }
+
+    function getImageUrls() {
+      return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
+    }
+
+    async function preloadAll() {
+      const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
+      if (!urls.length) return;
+      let done = 0;
+      const update = () => {
+        const pct = Math.round((done / urls.length) * 100);
+        percentText.textContent = pct + '%';
+      };
+      const loaders = urls.map(u => new Promise(r => {
+        const img = new Image();
+        img.onload = img.onerror = () => { done++; update(); r(); };
+        img.src = u;
+      }));
+      await Promise.all(loaders);
+    }
+
+    (async () => {
+      await preloadAll();
+      percentText.textContent = '100%';
+      preloader.classList.add('hidden');
+    })();
+  </script>
 </body>
 </html>

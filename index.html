@@ -7,11 +7,52 @@
   <title>OMDI TSAN COFA 7 - Olimpiade Madrasah Tsanawiyah</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
-
+  <style>
+    /* === PRELOADER STYLE === */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      z-index: 99999;
+      transition: opacity 0.4s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+    .loader {
+      width: 64px;
+      height: 64px;
+      border: 6px solid #ddd;
+      border-top-color: #5b21b6; /* warna ungu OMDI */
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    #percent {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
 
 </head>
 
 <body>
+  <div id="preloader">
+    <div>
+      <div class="spinner"></div>
+      <div id="percent">0%</div>
+    </div>
+  </div>
   <div class="section-bg"></div>
   <header>
     <nav>
@@ -44,8 +85,8 @@
       <div class="hero-badge">
         🏆 OMDI 2025
       </div>
-      <h1>Olimpiade Madrasah<br>Tsanawiyah</h1>
-      <p>Tempat Lahirnya Generasi Bertaqwa, Kompetitif, dan Inovatif dari MTs Negeri Padang Panjang</p>
+      <h1>OMDI TSANCOFA <br>7ᵗʰ</h1>
+      <p>Be A Diamond Of Knowledge And Pearl Of Faith</p>
       <div class="hero-cta">
         <a href="https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit" class="btn-primary" style="padding: 1rem 2.5rem;">Daftar Sekarang</a>
         <a href="#bidang-lomba" class="btn-secondary">Lihat Bidang Lomba</a>
@@ -262,6 +303,48 @@
   </footer>
 
   <script>
+    
+    const preloader = document.getElementById('preloader');
+    const percentText = document.getElementById('percent');
+
+    function getBackgroundUrls() {
+      const urls = new Set();
+      const regex = /url\((['"])?(.+?)\1\)/g;
+      document.querySelectorAll('*').forEach(el => {
+        const bg = getComputedStyle(el).backgroundImage;
+        let m;
+        while ((m = regex.exec(bg)) !== null) {
+          urls.add(new URL(m[2], document.baseURI).href);
+        }
+      });
+      return [...urls];
+    }
+
+    function getImageUrls() {
+      return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
+    }
+
+    async function preloadAll() {
+      const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
+      if (!urls.length) return;
+      let done = 0;
+      const update = () => {
+        const pct = Math.round((done / urls.length) * 100);
+        percentText.textContent = pct + '%';
+      };
+      const loaders = urls.map(u => new Promise(r => {
+        const img = new Image();
+        img.onload = img.onerror = () => { done++; update(); r(); };
+        img.src = u;
+      }));
+      await Promise.all(loaders);
+    }
+
+    (async () => {
+      await preloadAll();
+      percentText.textContent = '100%';
+      preloader.classList.add('hidden');
+    })();
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
