@@ -106,6 +106,10 @@
       }
     }
 
+    #bidang-lomba {
+      padding: 200px;
+    }
+
     :root {
       --purple-primary: #8B5CF6;
       --purple-dark: #6366F1;
@@ -323,9 +327,9 @@
 
     /* Countdown */
     .countdown-wrapper {
-      max-width: 1400px;
+      
       margin: 0 auto;
-      padding: 0 2rem 80px;
+      padding-top: 50px;
     }
 
     .countdown-card {
@@ -373,9 +377,10 @@
 
     /* Section */
     section {
-      max-width: 1400px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 80px 2rem;
+      background-color: rgb(235, 235, 235);
     }
 
     .section-header {
@@ -386,7 +391,7 @@
 
     .section-badge {
       display: inline-block;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.698), rgba(255, 255, 255, 0.345));
+      background: linear-gradient(135deg, rgba(89, 89, 89, 0.698), rgba(164, 164, 164, 0.345));
       padding: 0.4rem 1rem;
       border-radius: 50px;
       font-size: 0.85rem;
@@ -399,7 +404,7 @@
       font-size: 3rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      color: white;
+      color: black;
     }
 
     .section-description {
@@ -524,7 +529,6 @@
       background: var(--text-primary);
       color: white;
       padding: 4rem 2rem 2rem;
-      margin-top: 80px;
     }
 
     .footer-content {
@@ -591,6 +595,9 @@
 
     /* Responsive */
     @media (max-width: 968px) {
+      #bidang-lomba {
+      padding: 10%;
+    }
       .menu-toggle {
         display: flex;
       }
