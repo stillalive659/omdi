@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Foto Bergeser Terus</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* area utama slider */
+    .slider {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      overflow: hidden;
+    }
+
+    /* track tempat semua foto berjalan */
+    .slide-track {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* jarak antar foto */
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+
+    /* tiap foto */
+    .slide {
+      flex: 0 0 auto;
+    }
+
+    .slide img {
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px; /* sudut membulat */
+      display: block;
+    }
+
+    /* gradasi kiri-kanan agar halus */
+    .slider::before,
+    .slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .slider::before {
+      left: 0;
+      background: linear-gradient(to right, #000 30%, transparent);
+    }
+
+    .slider::after {
+      right: 0;
+      background: linear-gradient(to left, #000 30%, transparent);
+    }
+
+    /* animasi berjalan */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider">
+    <div class="slide-track">
+      <!-- 6 gambar asli -->
+      <div class="slide"><img src="https://picsum.photos/id/1018/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1024/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1039/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1043/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1050/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1062/800/450" alt=""></div>
+
+      <!-- duplikasi agar loop-nya halus -->
+      <div class="slide"><img src="https://picsum.photos/id/1018/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1024/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1039/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1043/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1050/800/450" alt=""></div>
+      <div class="slide"><img src="https://picsum.photos/id/1062/800/450" alt=""></div>
+    </div>
+  </div>
+
+</body>
+</html>
