@@ -20,22 +20,29 @@
       z-index: 99999;
       transition: opacity 0.4s ease;
     }
+
     #preloader.hidden {
       opacity: 0;
       pointer-events: none;
       visibility: hidden;
     }
+
     .loader {
       width: 64px;
       height: 64px;
       border: 6px solid #ddd;
-      border-top-color: #5b21b6; /* warna ungu OMDI */
+      border-top-color: #5b21b6;
+      /* warna ungu OMDI */
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
+
     #percent {
       margin-top: 10px;
       font-size: 14px;
@@ -47,6 +54,14 @@
 </head>
 
 <body>
+  
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-title">Maaf</div>
+    <div class="modal-text" id="modalMessage">Pesan akan muncul di sini</div>
+    <button class="close-btn" id="closeModal">Tutup</button>
+  </div>
+</div>
   <div id="preloader">
     <div>
       <div class="spinner"></div>
@@ -54,13 +69,20 @@
     </div>
   </div>
   <div class="section-bg"></div>
-  <header>
+  <header id="header">
     <nav>
-      <a href="https://mtsnpadangpanjang.sch.id" class="logo">
-        <img src="src/icon.png" alt="OMDI Logo"
-          style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
-        <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
-      </a>
+      <div class="logo">
+        <a href="https://mtsnpadangpanjang.sch.id" class="logo">
+          <img src="src/icon.png" alt="OMDI Logo"
+            style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
+          <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
+        </a>
+        <a href="https://omdi.mtsnpadangpanjang.sch.id" class="logo">
+          <img src="src/omdi_logo.png" alt="OMDI Logo"
+            style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
+          <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
+        </a>
+      </div>
 
       <div class="menu-toggle" id="menuToggle">
         <span></span>
@@ -71,11 +93,17 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#tmeline">Timeline</a></li>
         <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#Juknis">Juknis</a></li>  
+        <li class="ts-drop" id="dropdown">
+          <a href="#" id="dropdown-toggle">JUKNIS ▾</a>
+          <ul class="ts-drop-menu">
+            <li><a href="https://docs.google.com/document/d/1Vh1PYapj8vBQmcnbPQvIXJjk7SMXbSXM/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true" target="_blank">JUKNIS TSANCOFA OLYPIAD</a></li>
+            <li><a href="https://docs.google.com/document/d/14ztHSttY66me2TLOiy4AA9SIq8257xrj/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true" target="_blank">JUKNIS TSANCOFA NON OLYPIAD</a></li>
+          </ul>
+        </li>
         <li><a href="#bidang-lomba">Bidang Lomba</a></li>
         <li><a href="#galeri">Galeri</a></li>
         <li><a href="#kontak">Kontak</a></li>
-        <li><a href="https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit" class="btn-primary">Daftar Sekarang</a></li>
+        <li><a class="btn-primary" data-daftar>Daftar Sekarang</a></li>
       </ul>
     </nav>
   </header>
@@ -89,7 +117,9 @@
       <h1>OMDI TSANCOFA <br>7ᵗʰ</h1>
       <p>Be A Diamond Of Knowledge And Pearl Of Faith</p>
       <div class="hero-cta">
-        <a href="https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit" class="btn-primary" style="padding: 1rem 2.5rem;">Daftar Sekarang</a>
+
+        <a class="btn-primary" style="padding: 1rem 2.5rem;" data-daftar>Daftar Sekarang</a>
+
         <a href="#bidang-lomba" class="btn-secondary">Lihat Bidang Lomba</a>
       </div>
     </div>
@@ -286,7 +316,9 @@
           <li><a href="#Juknis">Juknis</a></li>
           <li><a href="#bidang-lomba">Bidang Lomba</a></li>
           <li><a href="#galeri">Galeri</a></li>
-          <li><a href="https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit">Pendaftaran</a></li>
+          <li><a
+              href="https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit">Pendaftaran</a>
+          </li>
         </ul>
       </div>
       <div class="footer-section">
@@ -308,177 +340,223 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 OMDI TSAN COFA 7. All rights reserved. Design By : <a href="https://ilwa.my.id">Ilwa</a> & <a href="https://zfrn.my.id">zfrn</a></p>
+      <p>&copy; 2025 OMDI TSAN COFA 7. All rights reserved. Design By : <a href="https://ilwa.my.id">Ilwa</a> & <a
+          href="https://zfrn.my.id">zfrn</a></p>
     </div>
   </footer>
 
-  <script>
-    
-    
-    const preloader = document.getElementById('preloader');
-    const percentText = document.getElementById('percent');
+  <script>// ==============================
+// Navbar Scroll
+// ==============================
+const navbar = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 500);
+});
 
-    function getBackgroundUrls() {
-      const urls = new Set();
-      const regex = /url\((['"])?(.+?)\1\)/g;
-      document.querySelectorAll('*').forEach(el => {
-        const bg = getComputedStyle(el).backgroundImage;
-        let m;
-        while ((m = regex.exec(bg)) !== null) {
-          urls.add(new URL(m[2], document.baseURI).href);
-        }
-      });
-      return [...urls];
+// ==============================
+// Preloader
+// ==============================
+const preloader = document.getElementById('preloader');
+const percentText = document.getElementById('percent');
+
+function getBackgroundUrls() {
+  const urls = new Set();
+  const regex = /url\((['"])?(.+?)\1\)/g;
+  document.querySelectorAll('*').forEach(el => {
+    const bg = getComputedStyle(el).backgroundImage;
+    let m;
+    while ((m = regex.exec(bg)) !== null) {
+      urls.add(new URL(m[2], document.baseURI).href);
     }
+  });
+  return [...urls];
+}
 
-    function getImageUrls() {
-      return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
-    }
+function getImageUrls() {
+  return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
+}
 
-    async function preloadAll() {
-      const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
-      if (!urls.length) return;
-      let done = 0;
-      const update = () => {
-        const pct = Math.round((done / urls.length) * 100);
-        percentText.textContent = pct + '%';
-      };
-      const loaders = urls.map(u => new Promise(r => {
-        const img = new Image();
-        img.onload = img.onerror = () => { done++; update(); r(); };
-        img.src = u;
-      }));
-      await Promise.all(loaders);
-    }
+async function preloadAll() {
+  const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
+  if (!urls.length) return;
+  let done = 0;
+  const update = () => percentText.textContent = Math.round((done / urls.length) * 100) + '%';
+  const loaders = urls.map(u => new Promise(r => {
+    const img = new Image();
+    img.onload = img.onerror = () => { done++; update(); r(); };
+    img.src = u;
+  }));
+  await Promise.all(loaders);
+}
 
-    (async () => {
-      await preloadAll();
-      percentText.textContent = '100%';
-      preloader.classList.add('hidden');
-    })();
-    
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
+(async () => {
+  await preloadAll();
+  percentText.textContent = '100%';
+  preloader.classList.add('hidden');
+})();
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+// ==============================
+// Mobile Menu Toggle
+// ==============================
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+const dropdownToggle = document.getElementById('dropdown-toggle');
+const dropdown = document.getElementById('dropdown');
 
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-      });
-    });
+menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    // Countdown Timer
-    const targetDate = new Date('2025-12-13T00:00:00').getTime();
+if (dropdownToggle && dropdown) {
+  dropdownToggle.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
+  });
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+  document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+  });
+}
 
-      if (distance < 0) {
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-        return;
-      }
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    if (link.id === 'dropdown-toggle') return;
+    navLinks.classList.remove('active');
+  });
+});
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // Smooth scroll hanya untuk link internal (yang href-nya diawali dengan #)
+// ==============================
+// Smooth Scroll
+// ==============================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const targetId = this.getAttribute('href');
-
-    // Hanya jalankan smooth scroll kalau memang link ke elemen di halaman ini
-    if (targetId && targetId.startsWith("#") && document.querySelector(targetId)) {
+    if (targetId && document.querySelector(targetId)) {
       e.preventDefault();
-      document.querySelector(targetId).scrollIntoView({
-        behavior: 'smooth'
-      });
+      document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
 
+// ==============================
+// Countdown Timer
+// ==============================
+const targetDate = new Date('2025-12-13T00:00:00').getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+  const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+  const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+  const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+  const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ==============================
+// Timeline
+// ==============================
 const timelineData = [
-      { tahap: "Pendaftaran", mulai: "2025-11-01T08:00:00", akhir: "2025-12-05T16:00:00" },
-      { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
-      { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
-      { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
-    ];
+  { tahap: "Pendaftaran", mulai: "2025-11-01T08:00:00", akhir: "2025-12-05T16:00:00" },
+  { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
+  { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
+  { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
+];
+const timeline = document.getElementById("timeline");
 
-    const timeline = document.getElementById("timeline");
+function clamp(val, min, max) { return Math.max(min, Math.min(val, max)); }
+function formatDateTime(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleString("id-ID", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
 
-    function clamp(val, min, max) {
-      return Math.max(min, Math.min(val, max));
-    }
+function updateTimeline() {
+  const now = new Date();
+  timeline.innerHTML = "";
+  timelineData.forEach(item => {
+    const start = new Date(item.mulai);
+    const end = new Date(item.akhir);
+    let progress = 0, status = "";
 
-    function formatDateTime(dateStr) {
-      const d = new Date(dateStr);
-      return d.toLocaleString("id-ID", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-    }
+    if (now < start) { progress = 0; status = "Belum Dimulai"; }
+    else if (now > end) { progress = 100; status = "Selesai"; }
+    else { progress = clamp((now - start) / (end - start) * 100, 0, 100); status = "Berlangsung"; }
 
-    function updateTimeline() {
+    const event = document.createElement("div");
+    event.className = "event";
+    event.innerHTML = `
+      <h3>${item.tahap}</h3>
+      <div class="date">🕒 ${formatDateTime(item.mulai)} → ${formatDateTime(item.akhir)}</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${progress}%"></div>
+      </div>
+      <div class="status">Status: <strong>${status}</strong></div>
+    `;
+    timeline.appendChild(event);
+  });
+}
+updateTimeline();
+setInterval(updateTimeline, 60000);
+
+
+  const daftarBtns = document.querySelectorAll('.btn-primary');
+  const modal = document.getElementById('modal');
+  const modalMessage = document.getElementById('modalMessage');
+  const closeModal = document.getElementById('closeModal');
+
+  // Rentang waktu pendaftaran (YYYY, MM-1, DD, HH, mm)
+  const startTime = new Date(2025, 10, 1, 8, 0); // 1 Nov 2025 08:00
+  const endTime = new Date(2025, 11, 5, 16, 0);   // 5 Des 2025 16:00
+  const formLink = "https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit";
+
+  daftarBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
       const now = new Date();
-      timeline.innerHTML = ""; // bersihkan isi lama
 
-      timelineData.forEach(item => {
-        const start = new Date(item.mulai);
-        const end = new Date(item.akhir);
-        let progress = 0;
-        let status = "";
-
-        if (now < start) {
-          progress = 0;
-          status = "Belum Dimulai";
-        } else if (now > end) {
-          progress = 100;
-          status = "Selesai";
+      if(now >= startTime && now <= endTime) {
+        window.location.href = formLink;
+      } else {
+        e.preventDefault();
+        if(now < startTime) {
+          showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
         } else {
-          const total = end - start;
-          const elapsed = now - start;
-          progress = clamp((elapsed / total) * 100, 0, 100);
-          status = "Berlangsung";
+          showModal("Pendaftaran sudah ditutup.");
         }
+      }
+    });
+  });
 
-        const event = document.createElement("div");
-        event.className = "event";
-        event.innerHTML = `
-          <h3>${item.tahap}</h3>
-          <div class="date">🕒 ${formatDateTime(item.mulai)} → ${formatDateTime(item.akhir)}</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width:${progress}%"></div>
-          </div>
-          <div class="status">Status: <strong>${status}</strong></div>
-        `;
-        timeline.appendChild(event);
-      });
-    }
+  closeModal.addEventListener('click', function() {
+    modal.style.display = "none";
+  });
 
-    updateTimeline();
-    // perbarui progress tiap menit agar tetap real-time
-    setInterval(updateTimeline, 60000);
+  function showModal(message) {
+    modalMessage.textContent = message;
+    modal.style.display = "flex";
+  }
 
-  </script>
+
+// ==============================
+// Gallery Slider Otomatis
+// ==============================
+const slideTrack = document.querySelector('.slide-track');
+if (slideTrack) {
+  let position = 0;
+  const speed = 1; // px per frame
+  const totalWidth = slideTrack.scrollWidth / 2;
+
+  function animateSlider() {
+    position += speed;
+    if (position >= totalWidth) position = 0;
+    slideTrack.style.transform = `translateX(-${position}px)`;
+    requestAnimationFrame(animateSlider);
+  }
+  animateSlider();
+}
+
+
+</script>

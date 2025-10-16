@@ -220,6 +220,7 @@
       backdrop-filter: blur(20px);
       z-index: 1000;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
     }
 
     nav {
@@ -258,7 +259,7 @@
     }
 
     .nav-links a {
-      color: var(--text-secondary);
+      color: white;
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
@@ -267,6 +268,23 @@
 
     .nav-links a:hover {
       color: var(--text-primary);
+    }
+
+    header.scrolled .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    header.scrolled .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    header.scrolled {
+      background-color: white;
+      transition: all 0.3s;
     }
 
     .btn-primary {
@@ -299,7 +317,7 @@
     .menu-toggle span {
       width: 24px;
       height: 2px;
-      background: var(--text-primary);
+      background: white;
       transition: all 0.3s;
     }
 
@@ -364,7 +382,7 @@
 
     .hero p {
       font-size: 1.4rem;
-      color: rgb(203, 203, 203);
+      color: rgb(255, 255, 255);
       max-width: 700px;
       margin: 0 auto 3rem;
       animation: fadeInUp 0.8s ease-out 0.4s both;
@@ -670,18 +688,251 @@
     transition: all 0.3s;
 
 }
+    header.scrolled .btn-primary {
+  border: 2px solid #5b21b6;
+  color: #5b21b6;
+  background: white;
+    transition: all 0.3s;
+
+}
 header .btn-primary:hover {
   background: #2b21b6;
   color: white;
   transition: all 0.3s;
 }
 
+/* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1s;
+    }
+
+    .modal-content {
+      background: linear-gradient(145deg, #6b5bff, #9c7bff);
+      padding: 30px 25px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      position: relative;
+      animation: slideIn 0.3s;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .modal-text {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .close-btn {
+      padding: 10px 20px;
+      background-color: white;
+      color: #6b5bff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .close-btn:hover {
+      background-color: #f0f0ff;
+      transform: translateY(-2px);
+    }
+
+   .ts-nav {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    .ts-nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+    }
+
+    .ts-logo {
+      font-weight: 700;
+      color: #8B5CF6;
+      font-size: 20px;
+    }
+
+    .ts-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .ts-menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .ts-menu a:hover {
+      color: #8B5CF6;
+    }
+
+    /* === DROPDOWN === */
+    .ts-drop {
+      position: relative;
+    }
+
+    .ts-drop-menu {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: white;
+      list-style: none;
+      padding: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      min-width: 260px;
+      display: none;
+      flex-direction: column;
+    }
+
+    .ts-drop-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+    }
+
+    .ts-drop-menu li a:hover {
+      background: #f3e8ff;
+      color: #8B5CF6;
+    }
+
+    .ts-drop:hover .ts-drop-menu {
+      display: flex;
+    }
+
+    /* === MENU BURGER (MOBILE) === */
+    .ts-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .ts-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #333;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    
+   /* Mobile dropdown */
+/* ================== DROPDOWN ================== */
+.ts-drop {
+  position: relative;
+}
+
+/* Desktop dropdown */
+@media (min-width: 769px) {
+  .ts-drop-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 260px;
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+  }
+
+  .ts-drop:hover .ts-drop-menu {
+    display: flex; /* muncul saat hover */
+  }
+
+  .ts-drop-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+  }
+
+  .ts-drop-menu li a:hover {
+    background: #f3e8ff;
+    color: #8B5CF6;
+  }
+}
+
+/* Mobile dropdown */
+@media (max-width: 768px) {
+  .ts-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: none;
+  }
+
+  .ts-menu.active {
+    display: flex;
+  }
+
+  /* Dropdown Juknis di mobile */
+  .ts-drop-menu {
+    position: relative; /* jangan absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    display: none; /* default mobile */
+    padding-left: 1rem;
+  }
+
+  .ts-drop.open .ts-drop-menu {
+    display: flex; /* muncul saat klik */
+  }
+
+  .ts-drop-menu li a {
+    padding: 0.8rem 1rem;
+  }
+
+  .ts-drop-menu li a:hover {
+    background: #f3e8ff;
+    color: #8B5CF6;
+  }
+}
 
       
     /* Responsive */
-    @media (max-width: 968px) {
-      
-    .slide img {
+    @media (max-width: 768px) {mg {
       width: 300px;
       height: 180px;
       object-fit: cover;
@@ -701,14 +952,15 @@ header .btn-primary:hover {
         top: 73px;
         left: -100%;
         width: 100%;
-        background: rgba(250, 250, 250, 0.98);
-        backdrop-filter: blur(20px);
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(2000px);
         flex-direction: column;
         padding: 2rem;
         gap: 1.5rem;
         transition: left 0.3s;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       }
+
 
       .nav-links.active {
         left: 0;
@@ -763,3 +1015,75 @@ header .btn-primary:hover {
       justify-content: center;
       align-items: center;
     }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%; /* MUNCUL DARI BAWAH NAVBAR */
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(10px);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+      }
+
+      .nav-links.active {
+        max-height: 600px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      /* Dropdown fix di mobile */
+      .dropdown:hover .dropdown-menu {
+        display: none;
+      }
+
+      .dropdown.open .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+    /* === FIX: Teks menu di mobile biar terlihat === */
+@media (max-width: 768px) {
+  header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-links a {
+    color: #333 !important;
+  }
+
+  .menu-toggle span {
+    background: #333 !important;
+  }
+
+  header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
