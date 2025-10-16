@@ -56,7 +56,7 @@
   <div class="section-bg"></div>
   <header>
     <nav>
-      <a href="#" class="logo">
+      <a href="https://mtsnpadangpanjang.sch.id" class="logo">
         <img src="src/icon.png" alt="OMDI Logo"
           style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
         <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
@@ -69,8 +69,9 @@
       </div>
 
       <ul class="nav-links" id="navLinks">
+        <li><a href="#tmeline">Timeline</a></li>
         <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#Juknis">Juknis</a></li>
+        <li><a href="#Juknis">Juknis</a></li>  
         <li><a href="#bidang-lomba">Bidang Lomba</a></li>
         <li><a href="#galeri">Galeri</a></li>
         <li><a href="#kontak">Kontak</a></li>
@@ -119,7 +120,16 @@
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Timeline Section -->
+    <section id="tmeline">
+      <div class="section-header">
+        <div class="section-badge">Timeline</div>
+        <h2 class="section-title">Timeline Pelaksanaan OMDI</h2>
+        <p class="section-description">Pantau perkembangan setiap tahap kegiatan secara real-time.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
     <section id="tentang">
       <div class="section-header">
         <div class="section-badge">Tentang OMDI</div>
@@ -304,6 +314,7 @@
 
   <script>
     
+    
     const preloader = document.getElementById('preloader');
     const percentText = document.getElementById('percent');
 
@@ -345,6 +356,7 @@
       percentText.textContent = '100%';
       preloader.classList.add('hidden');
     })();
+    
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -389,13 +401,84 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+    // Smooth scroll hanya untuk link internal (yang href-nya diawali dengan #)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const targetId = this.getAttribute('href');
+
+    // Hanya jalankan smooth scroll kalau memang link ke elemen di halaman ini
+    if (targetId && targetId.startsWith("#") && document.querySelector(targetId)) {
+      e.preventDefault();
+      document.querySelector(targetId).scrollIntoView({
+        behavior: 'smooth'
       });
-    });
+    }
+  });
+});
+
+const timelineData = [
+      { tahap: "Pendaftaran", mulai: "2025-11-01T08:00:00", akhir: "2025-12-05T16:00:00" },
+      { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
+      { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
+      { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
+    ];
+
+    const timeline = document.getElementById("timeline");
+
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(val, max));
+    }
+
+    function formatDateTime(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function updateTimeline() {
+      const now = new Date();
+      timeline.innerHTML = ""; // bersihkan isi lama
+
+      timelineData.forEach(item => {
+        const start = new Date(item.mulai);
+        const end = new Date(item.akhir);
+        let progress = 0;
+        let status = "";
+
+        if (now < start) {
+          progress = 0;
+          status = "Belum Dimulai";
+        } else if (now > end) {
+          progress = 100;
+          status = "Selesai";
+        } else {
+          const total = end - start;
+          const elapsed = now - start;
+          progress = clamp((elapsed / total) * 100, 0, 100);
+          status = "Berlangsung";
+        }
+
+        const event = document.createElement("div");
+        event.className = "event";
+        event.innerHTML = `
+          <h3>${item.tahap}</h3>
+          <div class="date">🕒 ${formatDateTime(item.mulai)} → ${formatDateTime(item.akhir)}</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${progress}%"></div>
+          </div>
+          <div class="status">Status: <strong>${status}</strong></div>
+        `;
+        timeline.appendChild(event);
+      });
+    }
+
+    updateTimeline();
+    // perbarui progress tiap menit agar tetap real-time
+    setInterval(updateTimeline, 60000);
+
   </script>

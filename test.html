@@ -1,108 +1,145 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Halaman dengan Preloader Cepat</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline Progress Berdasarkan Tanggal</title>
   <style>
     body {
-      margin: 0;
-      font-family: sans-serif;
-      background-image: url('https://picsum.photos/1600/900?random=1');
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fa;
+      padding: 40px;
+      color: #222;
     }
 
-    #preloader {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      z-index: 9999;
-      transition: opacity 0.3s ease;
-    }
-    #preloader.hidden {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
-    }
-    .spinner {
-      width: 60px;
-      height: 60px;
-      border: 6px solid #ddd;
-      border-top-color: #333;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    #percent {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #333;
+    h1 {
       text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 40px;
+      border-left: 4px solid #4caf50; /* garis lurus di kiri */
+    }
+
+    .event {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 25px;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid #4caf50;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .event h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2rem;
+    }
+
+    .date {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      transition: width 1s ease;
+    }
+
+    .status {
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .timeline {
+        padding-left: 30px;
+      }
+      .event {
+        padding-left: 20px;
+      }
+      .event::before {
+        left: -12px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="preloader">
-    <div>
-      <div class="spinner"></div>
-      <div id="percent">0%</div>
-    </div>
-  </div>
+  <h1>Timeline Kegiatan</h1>
 
-  <main style="padding:40px;color:white;text-shadow:0 1px 3px black">
-    <h1>Halaman Contoh</h1>
-    <p>Isi halaman muncul segera setelah semua gambar termuat.</p>
-    <img src="https://picsum.photos/800/400?random=2" alt="">
-  </main>
+  <div class="timeline" id="timeline"></div>
 
   <script>
-    const preloader = document.getElementById('preloader');
-    const percentText = document.getElementById('percent');
+    const timelineData = [
+      { tahap: "Pendaftaran", mulai: "2025-10-20", akhir: "2025-12-11" },
+      { tahap: "Seleksi Awal", mulai: "2025-10-12", akhir: "2025-10-25" },
+      { tahap: "Babak Final", mulai: "2025-10-26", akhir: "2025-10-30" },
+      { tahap: "Pengumuman", mulai: "2025-10-31", akhir: "2025-11-02" }
+    ];
 
-    function getBackgroundUrls() {
-      const urls = new Set();
-      const regex = /url\((['"])?(.+?)\1\)/g;
-      document.querySelectorAll('*').forEach(el => {
-        const bg = getComputedStyle(el).backgroundImage;
-        let m;
-        while ((m = regex.exec(bg)) !== null) {
-          urls.add(new URL(m[2], document.baseURI).href);
-        }
-      });
-      return [...urls];
+    const today = new Date();
+
+    const timeline = document.getElementById("timeline");
+
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(val, max));
     }
 
-    function getImageUrls() {
-      return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
-    }
+    timelineData.forEach(item => {
+      const start = new Date(item.mulai);
+      const end = new Date(item.akhir);
+      let progress = 0;
+      let status = "";
 
-    async function preloadAll() {
-      const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
-      if (!urls.length) return;
-      let done = 0;
-      const update = () => {
-        const pct = Math.round((done / urls.length) * 100);
-        percentText.textContent = pct + '%';
-      };
-      const loaders = urls.map(u => new Promise(r => {
-        const img = new Image();
-        img.onload = img.onerror = () => { done++; update(); r(); };
-        img.src = u;
-      }));
-      await Promise.all(loaders);
-    }
+      if (today < start) {
+        progress = 0;
+        status = "Belum Dimulai";
+      } else if (today > end) {
+        progress = 100;
+        status = "Selesai";
+      } else {
+        const total = end - start;
+        const elapsed = today - start;
+        progress = clamp((elapsed / total) * 100, 0, 100);
+        status = "Berlangsung";
+      }
 
-    (async () => {
-      await preloadAll();
-      percentText.textContent = '100%';
-      preloader.classList.add('hidden');
-    })();
+      const event = document.createElement("div");
+      event.className = "event";
+      event.innerHTML = `
+        <h3>${item.tahap}</h3>
+        <div class="date">${item.mulai} → ${item.akhir}</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${progress}%;"></div>
+        </div>
+        <div class="status">Status: <strong>${status}</strong></div>
+      `;
+      timeline.appendChild(event);
+    });
   </script>
 </body>
 </html>

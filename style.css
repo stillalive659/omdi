@@ -11,6 +11,76 @@
       box-sizing: border-box;
     }
 
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 40px;
+      border-left: 4px solid #8B5CF6; /* garis lurus di kiri */
+    }
+
+    .event {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 25px;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid #8B5CF6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .event h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2rem;
+    }
+
+    .date {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #8B5CF6, #af8dff);
+      transition: width 1s ease;
+    }
+
+    .status {
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 600px) {
+      #timeline {
+        padding-left: 30px;
+      }
+      .event {
+        padding-left: 20px;
+      }
+      .event::before {
+        left: -12px;
+      }
+    }
+
     #preloader {
       position: fixed;
       inset: 0;
@@ -48,7 +118,7 @@
     .slider {
       position: relative;
       width: 90%;
-      width: 100%px;
+      width: 100vw;
       overflow: hidden;
     }
 
@@ -88,12 +158,12 @@
 
     .slider::before {
       left: 0;
-      background: linear-gradient(to right, #000 10%, transparent);
+      background: linear-gradient(to right, #000 1%, transparent);
     }
 
     .slider::after {
       right: 0;
-      background: linear-gradient(to left, #000 10%, transparent);
+      background: linear-gradient(to left, #000 1%, transparent);
     }
 
     /* animasi berjalan */
@@ -138,7 +208,7 @@
       height: 100vh;
       background: url('src/a.png') no-repeat center center/cover;
       z-index: -1;
-      filter: brightness(0.7);
+      filter: brightness(1);
     }
     /* Header */
     header {
@@ -245,11 +315,11 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+      background: linear-gradient(135deg, rgba(72, 72, 254, 0.201), rgba(99, 102, 241, 0.1));
       padding: 0.5rem 1.2rem;
       border-radius: 50px;
       font-size: 0.9rem;
-      color: var(--purple-primary);
+      color: white;
       font-weight: 600;
       margin-bottom: 2rem;
       animation: fadeInDown 0.8s ease-out;
@@ -391,11 +461,11 @@
 
     .section-badge {
       display: inline-block;
-      background: linear-gradient(135deg, rgba(89, 89, 89, 0.698), rgba(164, 164, 164, 0.345));
+      background: linear-gradient(135deg, rgba(80, 86, 255, 0.698), rgba(97, 76, 255, 0.345));
       padding: 0.4rem 1rem;
       border-radius: 50px;
       font-size: 0.85rem;
-      color: var(--purple-primary);
+      color: white;
       font-weight: 600;
       margin-bottom: 1rem;
     }
@@ -593,8 +663,32 @@
       border: 1px solid #FFEAA7;
     }
 
+    header .btn-primary {
+  border: 2px solid #5b21b6;
+  color: white;
+  background: #5b21b6;
+    transition: all 0.3s;
+
+}
+header .btn-primary:hover {
+  background: #2b21b6;
+  color: white;
+  transition: all 0.3s;
+}
+
+
+      
     /* Responsive */
     @media (max-width: 968px) {
+      
+    .slide img {
+      width: 300px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px; /* sudut membulat */
+      display: block;
+    }
+
       #bidang-lomba {
       padding: 10%;
     }
