@@ -156,16 +156,6 @@
       pointer-events: none;
     }
 
-    .slider::before {
-      left: 0;
-      background: linear-gradient(to right, #000 1%, transparent);
-    }
-
-    .slider::after {
-      right: 0;
-      background: linear-gradient(to left, #000 1%, transparent);
-    }
-
     /* animasi berjalan */
     @keyframes scroll {
       0% {
@@ -888,6 +878,11 @@ header .btn-primary:hover {
 
 /* Mobile dropdown */
 @media (max-width: 768px) {
+  .slider img {
+     width: 300px;
+      height: 180px;
+  }
+
   .ts-menu {
     flex-direction: column;
     position: absolute;
