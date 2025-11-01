@@ -55,14 +55,14 @@
 </head>
 
 <body>
-  
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <div class="modal-title">Maaf</div>
-    <div class="modal-text" id="modalMessage">Pesan akan muncul di sini</div>
-    <button class="close-btn" id="closeModal">Tutup</button>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-title">Maaf</div>
+      <div class="modal-text" id="modalMessage">Pesan akan muncul di sini</div>
+      <button class="close-btn" id="closeModal">Tutup</button>
+    </div>
   </div>
-</div>
   <div id="preloader">
     <div>
       <div class="spinner"></div>
@@ -78,7 +78,7 @@
             style="width:44px;height:44px;border-radius:10px;box-shadow:0 2px 8px rgba(139,92,246,0.10);;object-fit:contain;display:block;">
           <!-- <span style="margin-left:0.7rem;font-weight:700;font-size:1.25rem;color:var(--purple-primary);letter-spacing:1px;">OMDI TSAN</span> -->
         </a>
-        
+
       </div>
 
       <div class="menu-toggle" id="menuToggle">
@@ -93,8 +93,12 @@
         <li class="ts-drop" id="dropdown">
           <a href="#" id="dropdown-toggle">Juknis ▾</a>
           <ul class="ts-drop-menu">
-            <li><a href="https://docs.google.com/document/d/1Vh1PYapj8vBQmcnbPQvIXJjk7SMXbSXM/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true" target="_blank">JUKNIS TSANCOFA OLYPIAD</a></li>
-            <li><a href="https://docs.google.com/document/d/14ztHSttY66me2TLOiy4AA9SIq8257xrj/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true" target="_blank">JUKNIS TSANCOFA NON OLYPIAD</a></li>
+            <li><a
+                href="https://docs.google.com/document/d/1qD3g_Q9VNsOKryy-taZU-YCJ0H8Xo9mN/edit?usp=sharing&ouid=115921019253941694315&rtpof=true&sd=true"
+                target="_blank">JUKNIS TSCOFA OLYPIAD</a></li>
+            <li><a
+                href="https://docs.google.com/document/d/1UUX49O6owDDtPwcymZ1jrBl--CHJsxhU/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true"
+                target="_blank">JUKNIS TSCOFA NON OLYPIAD</a></li>
           </ul>
         </li>
         <li><a href="#bidang-lomba">Bidang Lomba</a></li>
@@ -114,11 +118,19 @@
       <h1>OMDI TSANCOFA <br>7ᵗʰ</h1>
       <p>Be A Diamond Of Knowledge And Pearl Of Faith</p>
       <div class="hero-cta">
-
         <a class="btn-primary" style="padding: 1rem 2.5rem;" data-daftar>Daftar Sekarang</a>
-
-        <a href="#bidang-lomba" class="btn-secondary">Lihat Bidang Lomba</a>
+        <div class="dropdown">
+          <button class="dropbtn btn-secondary" id="dropdownBtn">Juknis ▼</button>
+          <div class="dropdown-content" id="dropdownMenu">
+            <a href="https://docs.google.com/document/d/1qD3g_Q9VNsOKryy-taZU-YCJ0H8Xo9mN/edit?usp=sharing&ouid=115921019253941694315&rtpof=true&sd=true"
+              target="_blank">JUKNIS TSCOFA OLYPIAD</a>
+            <a href="https://docs.google.com/document/d/1UUX49O6owDDtPwcymZ1jrBl--CHJsxhU/edit?usp=drive_link&ouid=115921019253941694315&rtpof=true&sd=true"
+              target="_blank">JUKNIS TSCOFA NON OLYPIAD</a>
+          </div>
+        </div>
       </div>
+
+    </div>
     </div>
 
     <!-- Countdown -->
@@ -324,7 +336,8 @@
       <div class="footer-section">
         <h4>Lokasi</h4>
         <ul class="footer-links">
-          <li style="color: rgba(255,255,255,0.7)"> JL. GANTING BUKIT SURUNGAN, Bukit Surungan, Kec. Padang Panjang Barat, Kota Padang Panjang Prov. Sumatera Barat</li>
+          <li style="color: rgba(255,255,255,0.7)"> JL. GANTING BUKIT SURUNGAN, Bukit Surungan, Kec. Padang Panjang
+            Barat, Kota Padang Panjang Prov. Sumatera Barat</li>
         </ul>
       </div>
     </div>
@@ -334,7 +347,8 @@
     </div>
   </footer>
 
-  <script>// ==============================
+<script>
+// ==============================
 // Navbar Scroll
 // ==============================
 const navbar = document.getElementById('header');
@@ -354,9 +368,7 @@ function getBackgroundUrls() {
   document.querySelectorAll('*').forEach(el => {
     const bg = getComputedStyle(el).backgroundImage;
     let m;
-    while ((m = regex.exec(bg)) !== null) {
-      urls.add(new URL(m[2], document.baseURI).href);
-    }
+    while ((m = regex.exec(bg)) !== null) urls.add(new URL(m[2], document.baseURI).href);
   });
   return [...urls];
 }
@@ -365,9 +377,9 @@ function getImageUrls() {
   return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
 }
 
-async function preloadAll() {
+function preloadAll(callback) {
   const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
-  if (!urls.length) return;
+  if (!urls.length) return callback();
   let done = 0;
   const update = () => percentText.textContent = Math.round((done / urls.length) * 100) + '%';
   const loaders = urls.map(u => new Promise(r => {
@@ -375,14 +387,13 @@ async function preloadAll() {
     img.onload = img.onerror = () => { done++; update(); r(); };
     img.src = u;
   }));
-  await Promise.all(loaders);
+  Promise.all(loaders).then(callback);
 }
 
-(async () => {
-  await preloadAll();
+preloadAll(() => {
   percentText.textContent = '100%';
   preloader.classList.add('hidden');
-})();
+});
 
 // ==============================
 // Mobile Menu Toggle
@@ -393,19 +404,15 @@ const dropdownToggle = document.getElementById('dropdown-toggle');
 const dropdown = document.getElementById('dropdown');
 
 menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-
 if (dropdownToggle && dropdown) {
   dropdownToggle.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     dropdown.classList.toggle('open');
   });
-
   document.addEventListener('click', e => {
     if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
   });
 }
-
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', e => {
     if (link.id === 'dropdown-toggle') return;
@@ -450,19 +457,17 @@ setInterval(updateCountdown, 1000);
 // Timeline
 // ==============================
 const timelineData = [
-  { tahap: "Pendaftaran", mulai: "2025-11-01T08:00:00", akhir: "2025-12-05T16:00:00" },
+  { tahap: "Pendaftaran", mulai: "2025-11-03T08:00:00", akhir: "2025-11-30T16:00:00" },
   { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
   { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
   { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
 ];
 const timeline = document.getElementById("timeline");
-
-function clamp(val, min, max) { return Math.max(min, Math.min(val, max)); }
+function clamp(v, min, max) { return Math.max(min, Math.min(v, max)); }
 function formatDateTime(dateStr) {
   const d = new Date(dateStr);
   return d.toLocaleString("id-ID", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 }
-
 function updateTimeline() {
   const now = new Date();
   timeline.innerHTML = "";
@@ -470,7 +475,6 @@ function updateTimeline() {
     const start = new Date(item.mulai);
     const end = new Date(item.akhir);
     let progress = 0, status = "";
-
     if (now < start) { progress = 0; status = "Belum Dimulai"; }
     else if (now > end) { progress = 100; status = "Selesai"; }
     else { progress = clamp((now - start) / (end - start) * 100, 0, 100); status = "Berlangsung"; }
@@ -480,9 +484,7 @@ function updateTimeline() {
     event.innerHTML = `
       <h3>${item.tahap}</h3>
       <div class="date">🕒 ${formatDateTime(item.mulai)} → ${formatDateTime(item.akhir)}</div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:${progress}%"></div>
-      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
       <div class="status">Status: <strong>${status}</strong></div>
     `;
     timeline.appendChild(event);
@@ -491,61 +493,81 @@ function updateTimeline() {
 updateTimeline();
 setInterval(updateTimeline, 60000);
 
+// ==============================
+// Tombol Daftar & Kuota Otomatis
+// ==============================
+const daftarBtns = document.querySelectorAll('.btn-primary');
+const modal = document.getElementById('modal');
+const modalMessage = document.getElementById('modalMessage');
+const closeModal = document.getElementById('closeModal');
 
-  const daftarBtns = document.querySelectorAll('.btn-primary');
-  const modal = document.getElementById('modal');
-  const modalMessage = document.getElementById('modalMessage');
-  const closeModal = document.getElementById('closeModal');
+// Rentang waktu pendaftaran
+const startTime = new Date(2025, 10, 3, 8, 0);  // 1 Nov 2025 08:00
+const endTime   = new Date(2025, 10, 30, 16, 0); // 30 Nov 2025 16:00
+const formLink  = "https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit";
 
-  // Rentang waktu pendaftaran (YYYY, MM-1, DD, HH, mm)
-  const startTime = new Date(2025, 10, 1, 8, 0); // 1 Nov 2025 08:00
-  const endTime = new Date(2025, 11, 5, 16, 0);   // 5 Des 2025 16:00
-  const formLink = "https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit";
+// Spreadsheet
+const SPREADSHEET_ID = "1AyngHAarfMYQduQeabpE5khaQjYjQ3oPuWhsPcyzTlw";
+const SHEET_NAME = "Data Rapi";
+const sheetUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-  daftarBtns.forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const now = new Date();
+function showModal(message) {
+  modalMessage.textContent = message;
+  modal.style.display = "flex";
+}
+closeModal.addEventListener('click', () => modal.style.display = "none");
 
-      if(now >= startTime && now <= endTime) {
-        window.location.href = formLink;
-      } else {
-        e.preventDefault();
-        if(now < startTime) {
-          showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
+daftarBtns.forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const now = new Date();
+
+    // Cek waktu pendaftaran
+    if (now < startTime) {
+      showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
+      return;
+    }
+    if (now > endTime) {
+      showModal("Pendaftaran sudah ditutup.");
+      return;
+    }
+
+    // Cek kuota di Google Sheet (saat tombol ditekan)
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(csvText => {
+        const rows = csvText.trim().split("\n");
+        const dataRows = rows.slice(1);
+        const barisTerisi = dataRows.filter(row => row.split(",").some(cell => cell.trim() !== "")).length;
+        console.log("Jumlah baris terisi:", barisTerisi);
+
+        if (barisTerisi >= 929) {
+          showModal("❌ Maaf, kuota pendaftaran telah penuh.");
         } else {
-          showModal("Pendaftaran sudah ditutup.");
+          window.location.href = formLink;
         }
-      }
-    });
+      })
+      .catch(err => {
+        console.error("Gagal mengambil data spreadsheet:", err);
+        showModal("❌ Gagal memeriksa kuota. Pastikan spreadsheet dipublikasikan & koneksi stabil.");
+      });
   });
-
-  closeModal.addEventListener('click', function() {
-    modal.style.display = "none";
-  });
-
-  function showModal(message) {
-    modalMessage.textContent = message;
-    modal.style.display = "flex";
-  }
-
+});
 
 // ==============================
 // Gallery Slider Otomatis
 // ==============================
 const slideTrack = document.querySelector('.slide-track');
 if (slideTrack) {
-  let position = 0;
-  const speed = 1; // px per frame
+  let pos = 0, speed = 1;
   const totalWidth = slideTrack.scrollWidth / 2;
-
-  function animateSlider() {
-    position += speed;
-    if (position >= totalWidth) position = 0;
-    slideTrack.style.transform = `translateX(-${position}px)`;
-    requestAnimationFrame(animateSlider);
+  function animate() {
+    pos += speed;
+    if (pos >= totalWidth) pos = 0;
+    slideTrack.style.transform = `translateX(-${pos}px)`;
+    requestAnimationFrame(animate);
   }
-  animateSlider();
+  animate();
 }
-
-
 </script>
+
