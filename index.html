@@ -352,227 +352,226 @@
     </div>
   </footer>
 
-<script>
-// ==============================
-// Navbar Scroll
-// ==============================
-const navbar = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 500);
-});
+  <script>
+    // ==============================
+    // Navbar Scroll
+    // ==============================
+    const navbar = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 500);
+    });
 
-// ==============================
-// Preloader
-// ==============================
-const preloader = document.getElementById('preloader');
-const percentText = document.getElementById('percent');
+    // ==============================
+    // Preloader
+    // ==============================
+    const preloader = document.getElementById('preloader');
+    const percentText = document.getElementById('percent');
 
-function getBackgroundUrls() {
-  const urls = new Set();
-  const regex = /url\((['"])?(.+?)\1\)/g;
-  document.querySelectorAll('*').forEach(el => {
-    const bg = getComputedStyle(el).backgroundImage;
-    let m;
-    while ((m = regex.exec(bg)) !== null) urls.add(new URL(m[2], document.baseURI).href);
-  });
-  return [...urls];
-}
-
-function getImageUrls() {
-  return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
-}
-
-function preloadAll(callback) {
-  const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
-  if (!urls.length) return callback();
-  let done = 0;
-  const update = () => percentText.textContent = Math.round((done / urls.length) * 100) + '%';
-  const loaders = urls.map(u => new Promise(r => {
-    const img = new Image();
-    img.onload = img.onerror = () => { done++; update(); r(); };
-    img.src = u;
-  }));
-  Promise.all(loaders).then(callback);
-}
-
-preloadAll(() => {
-  percentText.textContent = '100%';
-  preloader.classList.add('hidden');
-});
-
-// ==============================
-// Mobile Menu Toggle
-// ==============================
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-const dropdownToggle = document.getElementById('dropdown-toggle');
-const dropdown = document.getElementById('dropdown');
-
-menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-if (dropdownToggle && dropdown) {
-  dropdownToggle.addEventListener('click', e => {
-    e.preventDefault(); e.stopPropagation();
-    dropdown.classList.toggle('open');
-  });
-  document.addEventListener('click', e => {
-    if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
-  });
-}
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    if (link.id === 'dropdown-toggle') return;
-    navLinks.classList.remove('active');
-  });
-});
-
-// ==============================
-// Smooth Scroll
-// ==============================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
-    if (targetId && document.querySelector(targetId)) {
-      e.preventDefault();
-      document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+    function getBackgroundUrls() {
+      const urls = new Set();
+      const regex = /url\((['"])?(.+?)\1\)/g;
+      document.querySelectorAll('*').forEach(el => {
+        const bg = getComputedStyle(el).backgroundImage;
+        let m;
+        while ((m = regex.exec(bg)) !== null) urls.add(new URL(m[2], document.baseURI).href);
+      });
+      return [...urls];
     }
-  });
-});
 
-// ==============================
-// Countdown Timer
-// ==============================
-const targetDate = new Date('2025-12-13T00:00:00').getTime();
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
-  const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
-  const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-  const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-  const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+    function getImageUrls() {
+      return [...document.images].map(i => i.currentSrc || i.src).filter(Boolean);
+    }
 
-  document.getElementById('days').textContent = String(days).padStart(2, '0');
-  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+    function preloadAll(callback) {
+      const urls = [...new Set([...getBackgroundUrls(), ...getImageUrls()])];
+      if (!urls.length) return callback();
+      let done = 0;
+      const update = () => percentText.textContent = Math.round((done / urls.length) * 100) + '%';
+      const loaders = urls.map(u => new Promise(r => {
+        const img = new Image();
+        img.onload = img.onerror = () => { done++; update(); r(); };
+        img.src = u;
+      }));
+      Promise.all(loaders).then(callback);
+    }
 
-// ==============================
-// Timeline
-// ==============================
-const timelineData = [
-  { tahap: "Pendaftaran", mulai: "2025-11-03T08:00:00", akhir: "2025-11-30T16:00:00" },
-  { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
-  { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
-  { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
-];
-const timeline = document.getElementById("timeline");
-function clamp(v, min, max) { return Math.max(min, Math.min(v, max)); }
-function formatDateTime(dateStr) {
-  const d = new Date(dateStr);
-  return d.toLocaleString("id-ID", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
-}
-function updateTimeline() {
-  const now = new Date();
-  timeline.innerHTML = "";
-  timelineData.forEach(item => {
-    const start = new Date(item.mulai);
-    const end = new Date(item.akhir);
-    let progress = 0, status = "";
-    if (now < start) { progress = 0; status = "Belum Dimulai"; }
-    else if (now > end) { progress = 100; status = "Selesai"; }
-    else { progress = clamp((now - start) / (end - start) * 100, 0, 100); status = "Berlangsung"; }
+    preloadAll(() => {
+      percentText.textContent = '100%';
+      preloader.classList.add('hidden');
+    });
 
-    const event = document.createElement("div");
-    event.className = "event";
-    event.innerHTML = `
+    // ==============================
+    // Mobile Menu Toggle
+    // ==============================
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdownToggle = document.getElementById('dropdown-toggle');
+    const dropdown = document.getElementById('dropdown');
+
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    if (dropdownToggle && dropdown) {
+      dropdownToggle.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', e => {
+        if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+      });
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => {
+        if (link.id === 'dropdown-toggle') return;
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // ==============================
+    // Smooth Scroll
+    // ==============================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId && document.querySelector(targetId)) {
+          e.preventDefault();
+          document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ==============================
+    // Countdown Timer
+    // ==============================
+    const targetDate = new Date('2025-12-13T00:00:00').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+      const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ==============================
+    // Timeline
+    // ==============================
+    const timelineData = [
+      { tahap: "Pendaftaran", mulai: "2025-11-03T08:00:00", akhir: "2025-11-30T16:00:00" },
+      { tahap: "Seleksi Awal", mulai: "2025-12-13T08:00:00", akhir: "2025-12-13T10:00:00" },
+      { tahap: "Babak Final", mulai: "2025-12-13T13:00:00", akhir: "2025-12-13T15:00:00" },
+      { tahap: "Pengumuman", mulai: "2025-12-13T16:30:00", akhir: "2025-12-13T18:00:00" }
+    ];
+    const timeline = document.getElementById("timeline");
+    function clamp(v, min, max) { return Math.max(min, Math.min(v, max)); }
+    function formatDateTime(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleString("id-ID", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    }
+    function updateTimeline() {
+      const now = new Date();
+      timeline.innerHTML = "";
+      timelineData.forEach(item => {
+        const start = new Date(item.mulai);
+        const end = new Date(item.akhir);
+        let progress = 0, status = "";
+        if (now < start) { progress = 0; status = "Belum Dimulai"; }
+        else if (now > end) { progress = 100; status = "Selesai"; }
+        else { progress = clamp((now - start) / (end - start) * 100, 0, 100); status = "Berlangsung"; }
+
+        const event = document.createElement("div");
+        event.className = "event";
+        event.innerHTML = `
       <h3>${item.tahap}</h3>
       <div class="date">🕒 ${formatDateTime(item.mulai)} → ${formatDateTime(item.akhir)}</div>
       <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
       <div class="status">Status: <strong>${status}</strong></div>
     `;
-    timeline.appendChild(event);
-  });
-}
-updateTimeline();
-setInterval(updateTimeline, 60000);
-
-// ==============================
-// Tombol Daftar & Kuota Otomatis
-// ==============================
-const daftarBtns = document.querySelectorAll('.btn-primary');
-const modal = document.getElementById('modal');
-const modalMessage = document.getElementById('modalMessage');
-const closeModal = document.getElementById('closeModal');
-
-// Rentang waktu pendaftaran
-const startTime = new Date(2025, 10, 3, 8, 0);  // 1 Nov 2025 08:00
-const endTime   = new Date(2025, 10, 30, 16, 0); // 30 Nov 2025 16:00
-const formLink  = "https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit";
-
-// Spreadsheet
-const SPREADSHEET_ID = "1AyngHAarfMYQduQeabpE5khaQjYjQ3oPuWhsPcyzTlw";
-const SHEET_NAME = "Data Rapi";
-const sheetUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-
-function showModal(message) {
-  modalMessage.textContent = message;
-  modal.style.display = "flex";
-}
-closeModal.addEventListener('click', () => modal.style.display = "none");
-
-daftarBtns.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    const now = new Date();
-
-    // Cek waktu pendaftaran
-    if (now < startTime) {
-      showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
-      return;
-    }
-    if (now > endTime) {
-      showModal("Pendaftaran sudah ditutup.");
-      return;
-    }
-
-    // Cek kuota di Google Sheet (saat tombol ditekan)
-    fetch(sheetUrl)
-      .then(res => res.text())
-      .then(csvText => {
-        const rows = csvText.trim().split("\n");
-        const dataRows = rows.slice(1);
-        const barisTerisi = dataRows.filter(row => row.split(",").some(cell => cell.trim() !== "")).length;
-        console.log("Jumlah baris terisi:", barisTerisi);
-
-        if (barisTerisi >= 929) {
-          showModal("❌ Maaf, kuota pendaftaran telah penuh.");
-        } else {
-          window.location.href = formLink;
-        }
-      })
-      .catch(err => {
-        console.error("Gagal mengambil data spreadsheet:", err);
-        showModal("❌ Gagal memeriksa kuota. Pastikan spreadsheet dipublikasikan & koneksi stabil.");
+        timeline.appendChild(event);
       });
-  });
-});
+    }
+    updateTimeline();
+    setInterval(updateTimeline, 60000);
 
-// ==============================
-// Gallery Slider Otomatis
-// ==============================
-const slideTrack = document.querySelector('.slide-track');
-if (slideTrack) {
-  let pos = 0, speed = 1;
-  const totalWidth = slideTrack.scrollWidth / 2;
-  function animate() {
-    pos += speed;
-    if (pos >= totalWidth) pos = 0;
-    slideTrack.style.transform = `translateX(-${pos}px)`;
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
-</script>
+    // ==============================
+    // Tombol Daftar & Kuota Otomatis
+    // ==============================
+    const daftarBtns = document.querySelectorAll('.btn-primary');
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modalMessage');
+    const closeModal = document.getElementById('closeModal');
 
+    // Rentang waktu pendaftaran
+    const startTime = new Date(2025, 10, 3, 8, 0);  // 1 Nov 2025 08:00
+    const endTime = new Date(2025, 10, 30, 16, 0); // 30 Nov 2025 16:00
+    const formLink = "https://docs.google.com/forms/d/1zBmKw9E0-P3myq5f0tgXznppGvbmlux9_MzN5CASjXs/edit";
+
+    // Spreadsheet
+    const SPREADSHEET_ID = "1AyngHAarfMYQduQeabpE5khaQjYjQ3oPuWhsPcyzTlw";
+    const SHEET_NAME = "Data Rapi";
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    function showModal(message) {
+      modalMessage.textContent = message;
+      modal.style.display = "flex";
+    }
+    closeModal.addEventListener('click', () => modal.style.display = "none");
+
+    daftarBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const now = new Date();
+
+        // Cek waktu pendaftaran
+        if (now < startTime) {
+          showModal("Pendaftaran dibuka pada: " + startTime.toLocaleString());
+          return;
+        }
+        if (now > endTime) {
+          showModal("Pendaftaran sudah ditutup.");
+          return;
+        }
+
+        // Cek kuota di Google Sheet (saat tombol ditekan)
+        fetch(sheetUrl)
+          .then(res => res.text())
+          .then(csvText => {
+            const rows = csvText.trim().split("\n");
+            const dataRows = rows.slice(1);
+            const barisTerisi = dataRows.filter(row => row.split(",").some(cell => cell.trim() !== "")).length;
+            console.log("Jumlah baris terisi:", barisTerisi);
+
+            if (barisTerisi >= 929) {
+              showModal("❌ Maaf, kuota pendaftaran telah penuh.");
+            } else {
+              window.location.href = formLink;
+            }
+          })
+          .catch(err => {
+            console.error("Gagal mengambil data spreadsheet:", err);
+            showModal("❌ Gagal memeriksa kuota. Pastikan spreadsheet dipublikasikan & koneksi stabil.");
+          });
+      });
+    });
+
+    // ==============================
+    // Gallery Slider Otomatis
+    // ==============================
+    const slideTrack = document.querySelector('.slide-track');
+    if (slideTrack) {
+      let pos = 0, speed = 1;
+      const totalWidth = slideTrack.scrollWidth / 2;
+      function animate() {
+        pos += speed;
+        if (pos >= totalWidth) pos = 0;
+        slideTrack.style.transform = `translateX(-${pos}px)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
