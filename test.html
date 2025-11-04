@@ -3,72 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hitung Baris Terisi - Data Rapi</title>
+  <title>Video YouTube di Website</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: #f3f4f6;
+      background: #f4f4f4;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
     }
-    button {
-      background-color: #8b5cf6;
-      color: white;
+
+    .video-container {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
       border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background-color: #7c3aed;
-    }
-    #hasil {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #333;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-  <h2>🔢 Hitung Baris Terisi di Sheet "Data Rapi"</h2>
-  <button id="cekBtn">Hitung Sekarang</button>
-  <p id="hasil">Menunggu perhitungan...</p>
-
-  <script>
-    const SPREADSHEET_ID = "1AyngHAarfMYQduQeabpE5khaQjYjQ3oPuWhsPcyzTlw";
-    const SHEET_NAME = "Data Rapi";
-
-    async function hitungBarisTerisi() {
-      const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-      
-      try {
-        const res = await fetch(url);
-        const csvText = await res.text();
-
-        // Pisahkan teks CSV jadi array baris
-        const rows = csvText.trim().split("\n");
-
-        // Hilangkan baris header (baris 1)
-        const dataRows = rows.slice(1);
-
-        // Hitung baris yang punya isi (tidak kosong seluruhnya)
-        const barisTerisi = dataRows.filter(row => row.split(",").some(cell => cell.trim() !== "")).length;
-
-        document.getElementById("hasil").textContent = 
-          `✅ Jumlah baris terisi (mulai baris ke-2): ${barisTerisi}`;
-      } catch (error) {
-        document.getElementById("hasil").textContent = "❌ Gagal mengambil data. Pastikan spreadsheet sudah dipublikasikan ke web.";
-        console.error(error);
-      }
-    }
-
-    document.getElementById("cekBtn").addEventListener("click", hitungBarisTerisi);
-  </script>
+  <div class="video-container">
+    <iframe 
+      src="https://www.youtube.com/embed/lFR4utbwliw?si=FFclenY9a9GHD4p0?autoplay=1&rel=0"
+      title="Video YouTube"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
 </body>
 </html>
