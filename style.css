@@ -786,12 +786,15 @@ header .btn-primary:hover {
 }
 
 .close-btn {
-  padding: 10px 20px;
+  position: absolute;
+  right: 3%;
+  top: -2.5%;
+  padding: 5px 8px;
   margin-top: 20px;
   background-color: white;
-  color: #ff5b5b;
+  color: #ff0000;
   border: none;
-  border-radius: 8px;
+  border-radius: 100%;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
@@ -804,9 +807,10 @@ header .btn-primary:hover {
 
 .daftar-btn {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: white;
   color: #6b5bff;
+  width: 40%;
   border: none;
   border-radius: 8px;
   font-weight: bold;
