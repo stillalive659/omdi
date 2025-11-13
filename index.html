@@ -203,10 +203,11 @@
       <div class="timeline-container">
         <!-- Kolom 1: Image -->
         <div class="timeline-image">
-         <a href="src/Poster Omdi Tsancofa (1).jpg" download="Poster-OMDI-7th.png">
-          <img src="src/Poster Omdi Tsancofa (1).jpg" alt="Timeline OMDI" />
+          <a href="src/Poster Omdi Tsancofa (1).jpg" download="Poster-OMDI-7th.png">
+            <img src="src/Poster Omdi Tsancofa (1).jpg" alt="Timeline OMDI" />
           </a>
-          <p style="text-align:center; margin:1rem auto; font-weight:600; font-size: medium;">Klik Untuk Download Poster</p>
+          <p style="text-align:center; margin:1rem auto; font-weight:600; font-size: medium;">Klik Gambar Untuk Download
+            Poster</p>
         </div>
         <!-- Kolom 2: Timeline -->
         <div class="timeline-content">
@@ -626,28 +627,28 @@
       animate();
     }
     function openImageModal() {
-  const modal = document.getElementById('imageModal');
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden'; // Prevent scrolling
-}
+      const modal = document.getElementById('imageModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
 
-function closeImageModal() {
-  const modal = document.getElementById('imageModal');
-  modal.classList.remove('active');
-  document.body.style.overflow = 'auto'; // Enable scrolling
-}
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Enable scrolling
+    }
 
-// Close modal when clicking outside the image
-document.getElementById('imageModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeImageModal();
-  }
-});
+    // Close modal when clicking outside the image
+    document.getElementById('imageModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeImageModal();
+      }
+    });
 
-// Close modal with ESC key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeImageModal();
-  }
-});
+    // Close modal with ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
   </script>
