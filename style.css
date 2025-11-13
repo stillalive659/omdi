@@ -10,13 +10,72 @@
   box-sizing: border-box;
 }
 
+.timeline-container {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 3rem;
+  align-items:center;
+  margin-top: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timeline-image {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+}
+
+.timeline-image img {
+  width: 100%;
+  height: auto;
+  max-height: 900px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+  object-fit: contain; /* GANTI KE CONTAIN, bukan fill */
+  display: block;
+}
+
+.timeline-content {
+  width: 100%;
+}
+
 .timeline {
   position: relative;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   padding-left: 40px;
   border-left: 4px solid #8B5CF6;
-  /* garis lurus di kiri */
+}
+
+/* Responsive untuk tablet */
+@media (max-width: 1024px) {
+  .timeline-container {
+    grid-template-columns: 40% 60%;
+    gap: 2rem;
+  }
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 768px) {
+  .timeline-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .timeline-image {
+    position: relative;
+    top: 0;
+  }
+  
+  .timeline-image img {
+    max-height: 600px;
+  }
+  
+  .timeline {
+    padding-left: 30px;
+  }
 }
 
 .event {

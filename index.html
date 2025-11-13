@@ -51,22 +51,22 @@
       color: #333;
     }
   </style>
- <!-- Open Graph Meta Tags -->
-<meta property="og:url" content="https://omdi.mtsnpadangpanjang.sch.id">
-<meta property="og:type" content="website">
-<meta property="og:title" content="OMDI TSAN COFA 7 - Olimpiade Madrasah Tsanawiyah">
-<meta property="og:description" content="Be A Diamond Of Knowledge And Pearl Of Faith - OMDI TSANCOFA 7th 2025">
-<meta property="og:image" content="https://omdi.mtsnpadangpanjang.sch.id/src/omdi_logo.png">
-<meta property="og:image:width" content="320">
-<meta property="og:image:height" content="320">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:url" content="https://omdi.mtsnpadangpanjang.sch.id">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OMDI TSAN COFA 7 - Olimpiade Madrasah Tsanawiyah">
+  <meta property="og:description" content="Be A Diamond Of Knowledge And Pearl Of Faith - OMDI TSANCOFA 7th 2025">
+  <meta property="og:image" content="https://omdi.mtsnpadangpanjang.sch.id/src/omdi_logo.png">
+  <meta property="og:image:width" content="320">
+  <meta property="og:image:height" content="320">
 
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="omdi.mtsnpadangpanjang.sch.id">
-<meta property="twitter:url" content="https://omdi.mtsnpadangpanjang.sch.id">
-<meta name="twitter:title" content="OMDI TSAN COFA 7 - Olimpiade Madrasah Tsanawiyah">
-<meta name="twitter:description" content="Be A Diamond Of Knowledge And Pearl Of Faith - OMDI TSANCOFA 7th 2025">
-<meta name="twitter:image" content="https://omdi.mtsnpadangpanjang.sch.id/src/omdi_logo.png">
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="omdi.mtsnpadangpanjang.sch.id">
+  <meta property="twitter:url" content="https://omdi.mtsnpadangpanjang.sch.id">
+  <meta name="twitter:title" content="OMDI TSAN COFA 7 - Olimpiade Madrasah Tsanawiyah">
+  <meta name="twitter:description" content="Be A Diamond Of Knowledge And Pearl Of Faith - OMDI TSANCOFA 7th 2025">
+  <meta name="twitter:image" content="https://omdi.mtsnpadangpanjang.sch.id/src/omdi_logo.png">
 </head>
 
 <body>
@@ -200,7 +200,18 @@
         <h2 class="section-title">Timeline Pelaksanaan OMDI</h2>
         <p class="section-description">Pantau perkembangan setiap tahap kegiatan secara real-time.</p>
       </div>
-      <div class="timeline" id="timeline"></div>
+      <div class="timeline-container">
+        <!-- Kolom 1: Image -->
+        <div class="timeline-image">
+         <a href="src/Poster Omdi Tsancofa (1).jpg" download="Poster-OMDI-7th.png">
+          <img src="src/Poster Omdi Tsancofa (1).jpg" alt="Timeline OMDI" />
+          </a>
+        </div>
+        <!-- Kolom 2: Timeline -->
+        <div class="timeline-content">
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
     </section>
 
     <section id="tentang">
@@ -613,4 +624,29 @@
       }
       animate();
     }
+    function openImageModal() {
+  const modal = document.getElementById('imageModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto'; // Enable scrolling
+}
+
+// Close modal when clicking outside the image
+document.getElementById('imageModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeImageModal();
+  }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeImageModal();
+  }
+});
   </script>
